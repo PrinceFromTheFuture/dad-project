@@ -1,0 +1,86 @@
+import { BranchReport } from "@/types";
+import dayjs from "dayjs";
+
+
+export const branches: BranchReport[] = [
+  {
+    createdAt: dayjs().toString(),
+    fileSize: 1235643,
+    id: "1",
+    name: "Bnei Brak",
+    totalAgents: 1,
+    totalOperations: 1,
+  },
+  {
+    createdAt: dayjs().toString(),
+    fileSize: 2345678,
+    id: "2",
+    name: "Tel Aviv",
+    totalAgents: 1024,
+    totalOperations: 98321,
+  },
+  {
+    createdAt: dayjs().toString(),
+    fileSize: 1987654,
+    id: "3",
+    name: "Jerusalem",
+    totalAgents: 890,
+    totalOperations: 75234,
+  },
+  {
+    createdAt: dayjs().toString(),
+    fileSize: 1456789,
+    id: "4",
+    name: "Haifa",
+    totalAgents: 642,
+    totalOperations: 54321,
+  },
+  {
+    createdAt: dayjs().toString(),
+    fileSize: 1765432,
+    id: "5",
+    name: "Ashdod",
+    totalAgents: 512,
+    totalOperations: 43210,
+  },
+  {
+    createdAt: dayjs().toString(),
+    fileSize: 1984321,
+    id: "6",
+    name: "Rishon LeZion",
+    totalAgents: 734,
+    totalOperations: 65432,
+  },
+  {
+    createdAt: dayjs().toString(),
+    fileSize: 1678901,
+    id: "7",
+    name: "Petah Tikva",
+    totalAgents: 823,
+    totalOperations: 72345,
+  },
+  {
+    createdAt: dayjs().toString(),
+    fileSize: 1567890,
+    id: "8",
+    name: "Netanya",
+    totalAgents: 678,
+    totalOperations: 59876,
+  },
+  {
+    createdAt: dayjs().toString(),
+    fileSize: 1432109,
+    id: "9",
+    name: "Beer Sheva",
+    totalAgents: 587,
+    totalOperations: 48765,
+  },
+  {
+    createdAt: dayjs().toString(),
+    fileSize: 1321098,
+    id: "10",
+    name: "Rehovot",
+    totalAgents: 498,
+    totalOperations: 39876,
+  },
+];
