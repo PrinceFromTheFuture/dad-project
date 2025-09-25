@@ -10,6 +10,7 @@ import {
   GalleryVerticalEnd,
   Map,
   PieChart,
+  Settings,
   Settings2,
   SquareTerminal,
   Workflow,
@@ -53,15 +54,11 @@ const data = {
       icon: Workflow,
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
+      name: "Settings",
+      url: "/dashboard/settings",
+      icon: Settings,
     },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
+    
   ],
 };
 
