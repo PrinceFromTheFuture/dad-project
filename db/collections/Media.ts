@@ -9,7 +9,10 @@ const __dirname = path.dirname(__filename);
 
 const Media: CollectionConfig = {
   access: {
-    read: () => true, // allow public read
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
   },
   slug: "media",
   fields: [{ name: "name", type: "text" }],

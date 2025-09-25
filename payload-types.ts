@@ -71,6 +71,8 @@ export interface Config {
     branches: Branch;
     sessions: Session;
     reports: Report;
+    settings: Setting;
+    roles: Role;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +84,8 @@ export interface Config {
     branches: BranchesSelect<false> | BranchesSelect<true>;
     sessions: SessionsSelect<false> | SessionsSelect<true>;
     reports: ReportsSelect<false> | ReportsSelect<true>;
+    settings: SettingsSelect<false> | SettingsSelect<true>;
+    roles: RolesSelect<false> | RolesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -146,6 +150,34 @@ export interface Branch {
   id: string;
   name?: string | null;
   searchKey?: string | null;
+  settings?: (string | null) | Setting;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: string;
+  mode: 'unified' | 'splited';
+  categoriesGroups?:
+    | {
+        data?: (string | Role)[] | null;
+        id?: string | null;
+      }[]
+    | null;
+  sorting: 'name' | 'operations';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "roles".
+ */
+export interface Role {
+  id: string;
+  name?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -223,6 +255,14 @@ export interface PayloadLockedDocument {
         value: string | Report;
       } | null)
     | ({
+        relationTo: 'settings';
+        value: string | Setting;
+      } | null)
+    | ({
+        relationTo: 'roles';
+        value: string | Role;
+      } | null)
+    | ({
         relationTo: 'users';
         value: string | User;
       } | null);
@@ -293,6 +333,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface BranchesSelect<T extends boolean = true> {
   name?: T;
   searchKey?: T;
+  settings?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -317,6 +358,31 @@ export interface ReportsSelect<T extends boolean = true> {
   rawReport?: T;
   agents?: T;
   session?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  mode?: T;
+  categoriesGroups?:
+    | T
+    | {
+        data?: T;
+        id?: T;
+      };
+  sorting?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "roles_select".
+ */
+export interface RolesSelect<T extends boolean = true> {
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
 }

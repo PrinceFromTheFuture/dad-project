@@ -1,0 +1,997 @@
+[
+  {
+    "id": "Z2877279",
+    "name": "כהן ורדית שושנה",
+    "responsibility": " אזרחים ותיקים ושאירים\r",
+    "operations": [
+      { "category": "גמלאות כללי א", "repeated": 2974 },
+      { "category": "דלפק קדמי", "repeated": 1701 },
+      { "category": " מרום", "repeated": 1616 },
+      { "category": " גלש ומבוטח", "repeated": 1208 },
+      { "category": "כספית כללית חוב", "repeated": 219 },
+      { "category": "גורמי חוץ", "repeated": 127 },
+      { "category": " נכות כללית", "repeated": 109 },
+      { "category": "גיל פרישה", "repeated": 109 },
+      { "category": "תשתיות גביה", "repeated": 89 },
+      { "category": "ביטול חובות", "repeated": 68 },
+      { "category": "אכיפה", "repeated": 8 },
+      { "category": "הבטחת הכנסה", "repeated": 2 },
+      { "category": "אחר", "repeated": 1 },
+      { "category": "כללי למשתמשים", "repeated": 1 },
+      { "category": "זוש_חדש", "repeated": 34546 }
+    ]
+  },
+  {
+    "id": "Z4079171",
+    "name": "מקסימוף שרה",
+    "responsibility": " אזרחים ותיקים ושאירים\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 2411 },
+      { "category": "גמלאות כללי א", "repeated": 1978 },
+      { "category": "ביטול חובות", "repeated": 996 },
+      { "category": " מרום", "repeated": 261 },
+      { "category": "כספית כללית", "repeated": 225 },
+      { "category": "דלפק קדמי", "repeated": 152 },
+      { "category": "תשתיות גביה", "repeated": 137 },
+      { "category": "גורמי חוץ", "repeated": 62 },
+      { "category": "מעסיקים", "repeated": 11 },
+      { "category": "אכיפה", "repeated": 6 },
+      { "category": "זוש_חדש", "repeated": 24746 }
+    ]
+  },
+  {
+    "id": "Z2213589",
+    "name": "ארביב ברכה",
+    "responsibility": " בני ברק\r",
+    "operations": [
+      { "category": "דלפק קדמי", "repeated": 98 },
+      { "category": "גמלאות כללי א", "repeated": 64 },
+      { "category": " גלש ומבוטח", "repeated": 19 },
+      { "category": " נכות כללית", "repeated": 8 },
+      { "category": "כללי למשתמשים", "repeated": 3 },
+      { "category": "ביטול חובות", "repeated": 1011 }
+    ]
+  },
+  {
+    "id": "Z2426241",
+    "name": " מקיטן ישראלה",
+    "responsibility": " גבייה לא שכירים\r",
+    "operations": [
+      { "category": "מעסיקים", "repeated": 181 },
+      { "category": " קוד סודי", "repeated": 118 },
+      { "category": " אוכלוסין", "repeated": 57 },
+      { "category": "דלפק קדמי", "repeated": 54 },
+      { "category": "כללי למשתמשים", "repeated": 39 },
+      { "category": "כספית כללית", "repeated": 12 },
+      { "category": "מרכז מידע", "repeated": 10 },
+      { "category": "גמלאות כללי א", "repeated": 3 },
+      { "category": "גלש ומבוטח", "repeated": 60567 }
+    ]
+  },
+  {
+    "id": "Z3777712",
+    "name": " אבן-צור מאיה סיל",
+    "responsibility": " גבייה לא שכירים\r",
+    "operations": [
+      { "category": " קוד סודי", "repeated": 151 },
+      { "category": "מעסיקים", "repeated": 49 },
+      { "category": "כללי למשתמשים", "repeated": 10 },
+      { "category": "מרכז מידע", "repeated": 10 },
+      { "category": "גמלאות כללי ב", "repeated": 2 },
+      { "category": "גלש ומבוטח", "repeated": 20888 }
+    ]
+  },
+  {
+    "id": "Z5732476",
+    "name": " וקנין עדנה",
+    "responsibility": " גבייה לא שכירים\r",
+    "operations": [
+      { "category": "מעסיקים", "repeated": 34 },
+      { "category": " קוד סודי", "repeated": 32 },
+      { "category": "כללי למשתמשים", "repeated": 20 },
+      { "category": "מרכז מידע", "repeated": 10 },
+      { "category": "אכיפה", "repeated": 2 },
+      { "category": "גלש ומבוטח", "repeated": 53608 }
+    ]
+  },
+  {
+    "id": "C0163317",
+    "name": " מאוגמי שרון",
+    "responsibility": " גבייה לא שכירים\r",
+    "operations": [
+      { "category": " קוד סודי", "repeated": 107 },
+      { "category": "מעסיקים", "repeated": 74 },
+      { "category": "דלפק קדמי", "repeated": 30 },
+      { "category": "אכיפה", "repeated": 28 },
+      { "category": "כללי למשתמשים", "repeated": 2 },
+      { "category": " מרום", "repeated": 2 },
+      { "category": "גלש ומבוטח", "repeated": 39978 }
+    ]
+  },
+  {
+    "id": "C1118714",
+    "name": " חזן חגית",
+    "responsibility": " גבייה לא שכירים\r",
+    "operations": [
+      { "category": "מעסיקים", "repeated": 138 },
+      { "category": "דלפק קדמי", "repeated": 10 },
+      { "category": "מרכז מידע", "repeated": 6 },
+      { "category": "כללי למשתמשים", "repeated": 6 },
+      { "category": " קוד סודי", "repeated": 3 },
+      { "category": " תחזוקה", "repeated": 2 },
+      { "category": "גלש ומבוטח", "repeated": 18184 }
+    ]
+  },
+  {
+    "id": "Z2714960",
+    "name": "שלמה שרה",
+    "responsibility": " גבייה מעבידים\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 4695 },
+      { "category": "דלפק קדמי", "repeated": 246 },
+      { "category": " יומן משלוחים", "repeated": 43 },
+      { "category": "גמלאות כללי ב", "repeated": 34 },
+      { "category": "ילדים", "repeated": 27 },
+      { "category": "זוש_חדש", "repeated": 22 },
+      { "category": "כללי למשתמשים", "repeated": 18 },
+      { "category": "כספית כללית", "repeated": 9 },
+      { "category": "מעסיקים", "repeated": 19014 }
+    ]
+  },
+  {
+    "id": "Z2845942",
+    "name": "נהרי רויטל",
+    "responsibility": " גבייה מעבידים\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 3282 },
+      { "category": " קוד סודי", "repeated": 210 },
+      { "category": " יומן משלוחים", "repeated": 143 },
+      { "category": "דלפק קדמי", "repeated": 109 },
+      { "category": "כללי למשתמשים", "repeated": 15 },
+      { "category": " אוכלוסין", "repeated": 5 },
+      { "category": "אכיפה", "repeated": 4 },
+      { "category": "מעסיקים", "repeated": 22820 }
+    ]
+  },
+  {
+    "id": "Z5774212",
+    "name": "גינת אסתר",
+    "responsibility": " גמלאות כללי\r",
+    "operations": [
+      { "category": "ביטול חובות", "repeated": 1475 },
+      { "category": "גמלאות כללי א", "repeated": 946 },
+      { "category": "דלפק קדמי", "repeated": 749 },
+      { "category": "אמהות", "repeated": 170 },
+      { "category": " גלש ומבוטח", "repeated": 113 },
+      { "category": "מילואים", "repeated": 96 },
+      { "category": "כספית כללית חוב", "repeated": 85 },
+      { "category": " מרום", "repeated": 71 },
+      { "category": "זוש_חדש", "repeated": 54 },
+      { "category": "סיעוד", "repeated": 50 },
+      { "category": "הבטחת הכנסה", "repeated": 42 },
+      { "category": "מעסיקים", "repeated": 25 },
+      { "category": "ועדות רפואיות", "repeated": 12 },
+      { "category": "כללי למשתמשים", "repeated": 7 },
+      { "category": "תשתיות גביה", "repeated": 4 },
+      { "category": " נכות כללית", "repeated": 4 },
+      { "category": "אבטלה", "repeated": 4731 }
+    ]
+  },
+  {
+    "id": "C0066154",
+    "name": "בן ציון כהן רות",
+    "responsibility": " הבטחת הכנסה\r",
+    "operations": [
+      { "category": "גמלאות כללי א", "repeated": 521 },
+      { "category": " גלש ומבוטח", "repeated": 293 },
+      { "category": "כללי למשתמשים", "repeated": 98 },
+      { "category": " מרום", "repeated": 50 },
+      { "category": "דלפק קדמי", "repeated": 48 },
+      { "category": "אבטלה", "repeated": 43 },
+      { "category": "תשתיות גביה", "repeated": 11 },
+      { "category": " מכתבים", "repeated": 9 },
+      { "category": "גורמי חוץ", "repeated": 5 },
+      { "category": "הבטחת הכנסה", "repeated": 4366 }
+    ]
+  },
+  {
+    "id": "C1338899",
+    "name": "בן סימון מלכה אוגניה",
+    "responsibility": " הבטחת הכנסה\r",
+    "operations": [
+      { "category": "הבטחת הכנסה", "repeated": 12818 },
+      { "category": " גלש ומבוטח", "repeated": 1415 },
+      { "category": "גמלאות כללי א", "repeated": 1250 },
+      { "category": " מרום", "repeated": 277 },
+      { "category": "דלפק קדמי", "repeated": 241 },
+      { "category": " מכתבים", "repeated": 51 },
+      { "category": "גורמי חוץ", "repeated": 47 },
+      { "category": "כללי למשתמשים", "repeated": 1 },
+      { "category": "אבטלה", "repeated": 17566 }
+    ]
+  },
+  {
+    "id": "Z3730700",
+    "name": " כהן שימרית",
+    "responsibility": "הנהלת הגבייה\r",
+    "operations": [
+      { "category": "מעסיקים", "repeated": 244 },
+      { "category": "גמלאות כללי ב", "repeated": 42 },
+      { "category": " קוד סודי", "repeated": 37 },
+      { "category": "דלפק קדמי", "repeated": 23 },
+      { "category": "כללי למשתמשים", "repeated": 14 },
+      { "category": "אכיפה", "repeated": 10 },
+      { "category": "מרכז מידע", "repeated": 5 },
+      { "category": "גלש ומבוטח", "repeated": 24931 }
+    ]
+  },
+  { "id": "Z2229741", "name": " שלום נתנאל", "responsibility": "חקירות חוץ\r", "operations": [{ "category": "אוכלוסין", "repeated": 23 }] },
+  {
+    "id": "B1312426",
+    "name": "שלום אופק יוני",
+    "responsibility": "חקירות חוץ\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 523 },
+      { "category": "ביטוח שכר", "repeated": 196 },
+      { "category": "אכיפה", "repeated": 80 },
+      { "category": "כספית כללית", "repeated": 46 },
+      { "category": "גמלאות כללי א", "repeated": 31 },
+      { "category": "דלפק קדמי", "repeated": 6 },
+      { "category": " אוכלוסין", "repeated": 3 },
+      { "category": "מעסיקים", "repeated": 659 }
+    ]
+  },
+  {
+    "id": "C0127568",
+    "name": "ענקרי מיכל",
+    "responsibility": "חקירות חוץ\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 474 },
+      { "category": "מעסיקים", "repeated": 103 },
+      { "category": "כספית כללית", "repeated": 49 },
+      { "category": "גמלאות כללי א", "repeated": 48 },
+      { "category": "אכיפה", "repeated": 46 },
+      { "category": "ועדות רפואיות", "repeated": 5 },
+      { "category": "ביטוח שכר", "repeated": 4 },
+      { "category": "אבטלה", "repeated": 11881 }
+    ]
+  },
+  {
+    "id": "Z3469950",
+    "name": "גיאת נעמה",
+    "responsibility": " ייעוץ לקשיש\r",
+    "operations": [
+      { "category": "דלפק קדמי", "repeated": 152 },
+      { "category": "זוש_חדש", "repeated": 103 },
+      { "category": "מרכז מידע", "repeated": 31 },
+      { "category": "ייעוץ לקשיש", "repeated": 18 },
+      { "category": "גמלאות כללי א", "repeated": 18 },
+      { "category": "כספית מינהלית", "repeated": 14 },
+      { "category": " אוכלוסין", "repeated": 14 },
+      { "category": "כספית כללית", "repeated": 11 },
+      { "category": " מרום", "repeated": 5 },
+      { "category": "סיעוד", "repeated": 173 }
+    ]
+  },
+  {
+    "id": "Z2569978",
+    "name": "כהן שוקרון אורלי",
+    "responsibility": " כספים ובקרה\r",
+    "operations": [
+      { "category": "אבטלה", "repeated": 766 },
+      { "category": " גלש ומבוטח", "repeated": 332 },
+      { "category": "נפגעי עבודה", "repeated": 247 },
+      { "category": "גמלאות כללי א", "repeated": 239 },
+      { "category": " מרום", "repeated": 151 },
+      { "category": "דמי פגיעה", "repeated": 131 },
+      { "category": "אמהות", "repeated": 68 },
+      { "category": "הבטחת הכנסה", "repeated": 55 },
+      { "category": "זוש_חדש", "repeated": 28 },
+      { "category": "סיעוד", "repeated": 15 },
+      { "category": " נכות כללית", "repeated": 4 },
+      { "category": "ילדים", "repeated": 3 },
+      { "category": "כללי למשתמשים", "repeated": 1 },
+      { "category": "דלפק קדמי", "repeated": 846 }
+    ]
+  },
+  {
+    "id": "Z5530641",
+    "name": "ספו דוד",
+    "responsibility": " כספים ובקרה\r",
+    "operations": [
+      { "category": "אבטלה", "repeated": 486 },
+      { "category": "נפגעי עבודה", "repeated": 364 },
+      { "category": "סיעוד", "repeated": 291 },
+      { "category": "מילואים", "repeated": 209 },
+      { "category": "גמלאות כללי א", "repeated": 185 },
+      { "category": " גלש ומבוטח", "repeated": 143 },
+      { "category": "דמי פגיעה", "repeated": 132 },
+      { "category": "כספית מינהלית", "repeated": 124 },
+      { "category": "דלפק קדמי", "repeated": 103 },
+      { "category": "מעסיקים", "repeated": 43 },
+      { "category": "זוש_חדש", "repeated": 16 },
+      { "category": "גורמי חוץ", "repeated": 12 },
+      { "category": "כללי למשתמשים", "repeated": 1 },
+      { "category": "אמהות", "repeated": 571 }
+    ]
+  },
+  {
+    "id": "Z1733191",
+    "name": "קוזלובסקי אריה לייב",
+    "responsibility": " לוגיסטיקה\r",
+    "operations": [{ "category": "כללי למשתמשים", "repeated": 1 }]
+  },
+  {
+    "id": "Z3925335",
+    "name": "כהן אורלי",
+    "responsibility": "מרכז שירות\r",
+    "operations": [
+      { "category": "גמלאות כללי א", "repeated": 1821 },
+      { "category": "דלפק קדמי", "repeated": 1446 },
+      { "category": " גלש ומבוטח", "repeated": 1109 },
+      { "category": " מרום", "repeated": 836 },
+      { "category": "הבטחת הכנסה", "repeated": 370 },
+      { "category": "סיעוד", "repeated": 264 },
+      { "category": "אבטלה", "repeated": 257 },
+      { "category": "ביטול חובות", "repeated": 154 },
+      { "category": " נכות כללית", "repeated": 100 },
+      { "category": "גיל פרישה", "repeated": 97 },
+      { "category": "כספית כללית חוב", "repeated": 81 },
+      { "category": " מזונות", "repeated": 76 },
+      { "category": "תשתיות גביה", "repeated": 70 },
+      { "category": "גורמי חוץ", "repeated": 49 },
+      { "category": " קוד סודי", "repeated": 3 },
+      { "category": " מכתבים", "repeated": 3 },
+      { "category": "אמהות", "repeated": 1 },
+      { "category": "זוש_חדש", "repeated": 14714 }
+    ]
+  },
+  {
+    "id": "B0762026",
+    "name": " המבורגר תמר",
+    "responsibility": "מרכז שירות\r",
+    "operations": [
+      { "category": "דלפק קדמי", "repeated": 1541 },
+      { "category": " גלש ומבוטח", "repeated": 268 },
+      { "category": "כספית מינהלית", "repeated": 225 },
+      { "category": " אוכלוסין", "repeated": 26 },
+      { "category": "זוש_חדש", "repeated": 22 },
+      { "category": "כספית כללית", "repeated": 19 },
+      { "category": "ייעוץ לקשיש", "repeated": 16 },
+      { "category": "כללי למשתמשים", "repeated": 2 },
+      { "category": "ביטול חובות", "repeated": 1 },
+      { "category": "מענה קולי", "repeated": 1 },
+      { "category": "אבטלה", "repeated": 1 },
+      { "category": "מרום", "repeated": 5391 }
+    ]
+  },
+  {
+    "id": "Z5970727",
+    "name": " שניאור מירה",
+    "responsibility": "משאבי אנוש\r",
+    "operations": [
+      { "category": "כללי למשתמשים", "repeated": 15 },
+      { "category": "כח אדם", "repeated": 39 }
+    ]
+  },
+  {
+    "id": "Z1592593",
+    "name": "נגטו אביבה",
+    "responsibility": " משפחה\r",
+    "operations": [
+      { "category": "ילדים", "repeated": 6535 },
+      { "category": "גמלאות כללי א", "repeated": 3145 },
+      { "category": " גלש ומבוטח", "repeated": 439 },
+      { "category": "דלפק קדמי", "repeated": 399 },
+      { "category": "ביטוח שכר", "repeated": 269 },
+      { "category": " מרום", "repeated": 258 },
+      { "category": " מכתבים", "repeated": 94 },
+      { "category": " אוכלוסין", "repeated": 67 },
+      { "category": "מעסיקים", "repeated": 66 },
+      { "category": "כספית כללית חוב", "repeated": 14 },
+      { "category": "אמהות", "repeated": 23564 }
+    ]
+  },
+  {
+    "id": "Z2514359",
+    "name": "שנידמן לבנה",
+    "responsibility": " משפחה\r",
+    "operations": [
+      { "category": " מזונות", "repeated": 5548 },
+      { "category": "גמלאות כללי א", "repeated": 4338 },
+      { "category": " מרום", "repeated": 781 },
+      { "category": " גלש ומבוטח", "repeated": 644 },
+      { "category": " מכתבים", "repeated": 517 },
+      { "category": "דלפק קדמי", "repeated": 514 },
+      { "category": "ביטוח שכר", "repeated": 334 },
+      { "category": "תשתיות גביה", "repeated": 251 },
+      { "category": "ביטול חובות", "repeated": 140 },
+      { "category": "מעסיקים", "repeated": 40 },
+      { "category": " אוכלוסין", "repeated": 4 },
+      { "category": "אמהות", "repeated": 39086 }
+    ]
+  },
+  {
+    "id": "Z2908905",
+    "name": "אלמוג גילה",
+    "responsibility": " משפחה\r",
+    "operations": [
+      { "category": " מזונות", "repeated": 2138 },
+      { "category": "גמלאות כללי א", "repeated": 1574 },
+      { "category": " גלש ומבוטח", "repeated": 618 },
+      { "category": "דלפק קדמי", "repeated": 418 },
+      { "category": " מכתבים", "repeated": 332 },
+      { "category": " מרום", "repeated": 329 },
+      { "category": "ביטול חובות", "repeated": 73 },
+      { "category": "כספית כללית חוב", "repeated": 64 },
+      { "category": "אבטלה", "repeated": 43 },
+      { "category": "מעסיקים", "repeated": 32 },
+      { "category": "גורמי חוץ", "repeated": 7 },
+      { "category": "אמהות", "repeated": 16016 }
+    ]
+  },
+  {
+    "id": "Z3179815",
+    "name": "טולדאנו ליליאן",
+    "responsibility": " משפחה\r",
+    "operations": [
+      { "category": "ילדים", "repeated": 5226 },
+      { "category": "גמלאות כללי א", "repeated": 4226 },
+      { "category": " מכתבים", "repeated": 529 },
+      { "category": "דלפק קדמי", "repeated": 515 },
+      { "category": " גלש ומבוטח", "repeated": 444 },
+      { "category": " מרום", "repeated": 379 },
+      { "category": " אוכלוסין", "repeated": 234 },
+      { "category": "אבטלה", "repeated": 169 },
+      { "category": "כספית כללית", "repeated": 13 },
+      { "category": "כללי למשתמשים", "repeated": 3 },
+      { "category": "אמהות", "repeated": 32605 }
+    ]
+  },
+  {
+    "id": "Z3703607",
+    "name": "ארנון תהילה",
+    "responsibility": " משפחה\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 2802 },
+      { "category": "גמלאות כללי א", "repeated": 1673 },
+      { "category": "דלפק קדמי", "repeated": 539 },
+      { "category": "זוש_חדש", "repeated": 352 },
+      { "category": "ביטול חובות", "repeated": 320 },
+      { "category": " מרום", "repeated": 297 },
+      { "category": "כללי למשתמשים", "repeated": 270 },
+      { "category": " מכתבים", "repeated": 256 },
+      { "category": "אבטלה", "repeated": 162 },
+      { "category": "שמאות", "repeated": 128 },
+      { "category": "כספית כללית", "repeated": 87 },
+      { "category": "תשתיות גביה", "repeated": 86 },
+      { "category": "אכיפה", "repeated": 68 },
+      { "category": "מרכז מידע", "repeated": 64 },
+      { "category": "גורמי חוץ", "repeated": 39 },
+      { "category": "הבטחת הכנסה", "repeated": 38296 }
+    ]
+  },
+  {
+    "id": "Z1462830",
+    "name": " אסחייק כרמלה",
+    "responsibility": "נכות כללית וניידות\r",
+    "operations": [
+      { "category": "דלפק קדמי", "repeated": 163 },
+      { "category": "גמלאות כללי א", "repeated": 110 },
+      { "category": " גלש ומבוטח", "repeated": 8 },
+      { "category": " אוכלוסין", "repeated": 6 },
+      { "category": "כללי למשתמשים", "repeated": 1 },
+      { "category": "נכות כללית", "repeated": 10108 }
+    ]
+  },
+  {
+    "id": "Z2178371",
+    "name": " סקא סיון",
+    "responsibility": "נכות כללית\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 223 },
+      { "category": "דלפק קדמי", "repeated": 48 },
+      { "category": "גמלאות כללי א", "repeated": 2 },
+      { "category": "נכות כללית", "repeated": 2088 }
+    ]
+  },
+  {
+    "id": "Z2484574",
+    "name": " בקר מרים",
+    "responsibility": "נכות כללית וניידות\r",
+    "operations": [
+      { "category": " נכות כללית", "repeated": 3158 },
+      { "category": " אוכלוסין", "repeated": 237 },
+      { "category": "דלפק קדמי", "repeated": 164 },
+      { "category": "גמלאות כללי א", "repeated": 143 },
+      { "category": "כספית כללית", "repeated": 82 },
+      { "category": "ביטול חובות", "repeated": 58 },
+      { "category": "תשתיות גביה", "repeated": 56 },
+      { "category": "אכיפה", "repeated": 41 },
+      { "category": "גורמי חוץ", "repeated": 12 },
+      { "category": " גלש ומבוטח", "repeated": 8 },
+      { "category": "כללי למשתמשים", "repeated": 5 },
+      { "category": " מרום", "repeated": 3 },
+      { "category": " קוד סודי", "repeated": 2 },
+      { "category": "ניידות", "repeated": 8930 }
+    ]
+  },
+  {
+    "id": "Z2776704",
+    "name": " ברגר נעמי",
+    "responsibility": "נכות כללית וניידות\r",
+    "operations": [
+      { "category": "דלפק קדמי", "repeated": 168 },
+      { "category": " אוכלוסין", "repeated": 147 },
+      { "category": "תשתיות גביה", "repeated": 61 },
+      { "category": "כספית כללית", "repeated": 15 },
+      { "category": "זוש_חדש", "repeated": 7 },
+      { "category": "גורמי חוץ", "repeated": 7 },
+      { "category": "גמלאות כללי א", "repeated": 2 },
+      { "category": "נכות כללית", "repeated": 7143 }
+    ]
+  },
+  {
+    "id": "Z3567991",
+    "name": " וקנין אבישג",
+    "responsibility": "נכות כללית\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 543 },
+      { "category": "שירותים רפואיים", "repeated": 328 },
+      { "category": "גמלאות כללי א", "repeated": 255 },
+      { "category": "כספית כללית חוב", "repeated": 28 },
+      { "category": "ביטול חובות", "repeated": 19 },
+      { "category": "דלפק קדמי", "repeated": 5 },
+      { "category": " מרום", "repeated": 3 },
+      { "category": "נכות כללית", "repeated": 2507 }
+    ]
+  },
+  {
+    "id": "Z3686728",
+    "name": " בראך פסה גיטל",
+    "responsibility": "נכות כללית וניידות\r",
+    "operations": [
+      { "category": "תשתיות גביה", "repeated": 384 },
+      { "category": " גלש ומבוטח", "repeated": 266 },
+      { "category": "שיקום", "repeated": 75 },
+      { "category": "נכות כללית", "repeated": 1280 }
+    ]
+  },
+  {
+    "id": "Z6663381",
+    "name": " צנעני לוי מרים",
+    "responsibility": "נכות כללית וניידות\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 233 },
+      { "category": "ביטול חובות", "repeated": 111 },
+      { "category": "גמלאות כללי א", "repeated": 22 },
+      { "category": "דלפק קדמי", "repeated": 19 },
+      { "category": "ביטוח שכר", "repeated": 12 },
+      { "category": "מרכז מידע", "repeated": 6 },
+      { "category": " מרום", "repeated": 2 },
+      { "category": "נכות כללית", "repeated": 2336 }
+    ]
+  },
+  {
+    "id": "B0446586",
+    "name": " קמחי יעל",
+    "responsibility": "נכות כללית וניידות\r",
+    "operations": [
+      { "category": "ביטול חובות", "repeated": 456 },
+      { "category": "גמלאות כללי א", "repeated": 92 },
+      { "category": " גלש ומבוטח", "repeated": 64 },
+      { "category": "דלפק קדמי", "repeated": 57 },
+      { "category": "כספית כללית חוב", "repeated": 51 },
+      { "category": " מרום", "repeated": 5 },
+      { "category": "כללי למשתמשים", "repeated": 2 },
+      { "category": "נכות כללית", "repeated": 941 }
+    ]
+  },
+  {
+    "id": "C1627031",
+    "name": " מתתוב אחינועם",
+    "responsibility": "נכות כללית\r",
+    "operations": [
+      { "category": " ניידות", "repeated": 928 },
+      { "category": "תשתיות גביה", "repeated": 79 },
+      { "category": "דלפק קדמי", "repeated": 45 },
+      { "category": "ביטול חובות", "repeated": 40 },
+      { "category": "גמלאות כללי א", "repeated": 37 },
+      { "category": "אכיפה", "repeated": 18 },
+      { "category": " גלש ומבוטח", "repeated": 18 },
+      { "category": "כספית כללית", "repeated": 8 },
+      { "category": "מרכז מידע", "repeated": 7 },
+      { "category": " מרום", "repeated": 6 },
+      { "category": "נכות כללית", "repeated": 3810 }
+    ]
+  },
+  {
+    "id": "C1659979",
+    "name": "מלובני בתיה",
+    "responsibility": "נכות כללית וניידות\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 1690 },
+      { "category": "גמלאות כללי א", "repeated": 1459 },
+      { "category": "ביטול חובות", "repeated": 752 },
+      { "category": "דלפק קדמי", "repeated": 263 },
+      { "category": " מרום", "repeated": 252 },
+      { "category": "כללי למשתמשים", "repeated": 207 },
+      { "category": " נכות כללית", "repeated": 108 },
+      { "category": "זוש_חדש", "repeated": 95 },
+      { "category": "תשתיות גביה", "repeated": 91 },
+      { "category": "גורמי חוץ", "repeated": 63 },
+      { "category": " מכתבים", "repeated": 38 },
+      { "category": "אכיפה", "repeated": 23 },
+      { "category": "מרכז מידע", "repeated": 8 },
+      { "category": "אבטלה", "repeated": 6 },
+      { "category": " אוכלוסין", "repeated": 3 },
+      { "category": "שמאות", "repeated": 3 },
+      { "category": "הבטחת הכנסה", "repeated": 17074 }
+    ]
+  },
+  {
+    "id": "Z1585537",
+    "name": "ורדי אודליה א",
+    "responsibility": "נפגעי עבודה כולל ועדות\r",
+    "operations": [
+      { "category": "נפגעי עבודה", "repeated": 3019 },
+      { "category": "שירותים רפואיים", "repeated": 128 },
+      { "category": "דלפק קדמי", "repeated": 88 },
+      { "category": "גמלאות כללי א", "repeated": 62 },
+      { "category": "גורמי חוץ", "repeated": 50 },
+      { "category": " מרום", "repeated": 40 },
+      { "category": " אוכלוסין", "repeated": 19 },
+      { "category": "כספית כללית חוב", "repeated": 19 },
+      { "category": " גלש ומבוטח", "repeated": 18 },
+      { "category": "ביטול חובות", "repeated": 16 },
+      { "category": "אמהות", "repeated": 15 },
+      { "category": "מעסיקים", "repeated": 12 },
+      { "category": "מרכז מידע", "repeated": 6 },
+      { "category": "ביטוח שכר", "repeated": 3 },
+      { "category": "דמי פגיעה", "repeated": 6310 }
+    ]
+  },
+  {
+    "id": "Z2875478",
+    "name": "מהלא רויטל",
+    "responsibility": "נפגעי עבודה כולל ועדות\r",
+    "operations": [
+      { "category": "נפגעי עבודה", "repeated": 2937 },
+      { "category": " נפגעי איבה", "repeated": 1748 },
+      { "category": "שירותים רפואיים", "repeated": 180 },
+      { "category": "דלפק קדמי", "repeated": 173 },
+      { "category": "גמלאות כללי א", "repeated": 169 },
+      { "category": " גלש ומבוטח", "repeated": 146 },
+      { "category": "מעסיקים", "repeated": 79 },
+      { "category": "גורמי חוץ", "repeated": 46 },
+      { "category": "ביטוח שכר", "repeated": 22 },
+      { "category": "ועדות רפואיות", "repeated": 21 },
+      { "category": "כספית כללית", "repeated": 10 },
+      { "category": " אוכלוסין", "repeated": 10 },
+      { "category": "כללי למשתמשים", "repeated": 8 },
+      { "category": " מרום", "repeated": 3 },
+      { "category": "דמי פגיעה", "repeated": 5809 }
+    ]
+  },
+  {
+    "id": "Z4069470",
+    "name": "זגדון מאיה",
+    "responsibility": "נפגעי עבודה כולל ועדות\r",
+    "operations": [
+      { "category": "דמי פגיעה", "repeated": 1241 },
+      { "category": "גמלאות כללי א", "repeated": 695 },
+      { "category": " מרום", "repeated": 569 },
+      { "category": "דלפק קדמי", "repeated": 389 },
+      { "category": " אוכלוסין", "repeated": 245 },
+      { "category": " מכתבים", "repeated": 197 },
+      { "category": " גלש ומבוטח", "repeated": 173 },
+      { "category": "אמהות", "repeated": 9505 }
+    ]
+  },
+  {
+    "id": "Z4186288",
+    "name": "הורברג צפורה",
+    "responsibility": "נפגעי עבודה כולל ועדות\r",
+    "operations": [
+      { "category": " נפגעי איבה", "repeated": 3928 },
+      { "category": "נפגעי עבודה", "repeated": 2389 },
+      { "category": "גורמי חוץ", "repeated": 163 },
+      { "category": "שירותים רפואיים", "repeated": 114 },
+      { "category": "גמלאות כללי א", "repeated": 75 },
+      { "category": "דלפק קדמי", "repeated": 49 },
+      { "category": " גלש ומבוטח", "repeated": 26 },
+      { "category": " מרום", "repeated": 13 },
+      { "category": " אוכלוסין", "repeated": 6 },
+      { "category": "דמי פגיעה", "repeated": 4791 }
+    ]
+  },
+  {
+    "id": "Z6125068",
+    "name": "סרודי דנה",
+    "responsibility": "נפגעי עבודה כולל ועדות\r",
+    "operations": [
+      { "category": "נפגעי עבודה", "repeated": 1863 },
+      { "category": "שירותים רפואיים", "repeated": 98 },
+      { "category": "גמלאות כללי א", "repeated": 79 },
+      { "category": "גורמי חוץ", "repeated": 73 },
+      { "category": " גלש ומבוטח", "repeated": 70 },
+      { "category": "ילדים", "repeated": 57 },
+      { "category": "אמהות", "repeated": 46 },
+      { "category": "דלפק קדמי", "repeated": 30 },
+      { "category": " מרום", "repeated": 28 },
+      { "category": "מעסיקים", "repeated": 23 },
+      { "category": "ביטוח שכר", "repeated": 7 },
+      { "category": "דמי פגיעה", "repeated": 4028 }
+    ]
+  },
+  {
+    "id": "C0258692",
+    "name": "שגיא נאור",
+    "responsibility": "נפגעי עבודה כולל ועדות\r",
+    "operations": [
+      { "category": " מרום", "repeated": 2996 },
+      { "category": "נפגעי עבודה", "repeated": 28 },
+      { "category": " גלש ומבוטח", "repeated": 23 },
+      { "category": "מרכז מידע", "repeated": 3 },
+      { "category": "דמי פגיעה", "repeated": 7181 }
+    ]
+  },
+  {
+    "id": "Z2520103",
+    "name": "לב אור ענבל",
+    "responsibility": " סיעוד\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 1641 },
+      { "category": "דלפק קדמי", "repeated": 835 },
+      { "category": "גמלאות כללי א", "repeated": 740 },
+      { "category": " מרום", "repeated": 356 },
+      { "category": "גורמי חוץ", "repeated": 337 },
+      { "category": " מכתבים", "repeated": 284 },
+      { "category": "תשתיות גביה", "repeated": 116 },
+      { "category": " אוכלוסין", "repeated": 99 },
+      { "category": " נכות כללית", "repeated": 85 },
+      { "category": "כספית כללית", "repeated": 33 },
+      { "category": " קוד סודי", "repeated": 6 },
+      { "category": "סיעוד", "repeated": 58187 }
+    ]
+  },
+  {
+    "id": "Z3616112",
+    "name": "קרלוייץ מעיין",
+    "responsibility": " סיעוד\r",
+    "operations": [
+      { "category": "דלפק קדמי", "repeated": 1160 },
+      { "category": " מרום", "repeated": 186 },
+      { "category": "תשתיות גביה", "repeated": 56 },
+      { "category": " מכתבים", "repeated": 42 },
+      { "category": " גלש ומבוטח", "repeated": 26 },
+      { "category": " נכות כללית", "repeated": 14 },
+      { "category": "סיעוד", "repeated": 14121 }
+    ]
+  },
+  {
+    "id": "Z3921027",
+    "name": "שוורץ מאיר דוד",
+    "responsibility": " סיעוד\r",
+    "operations": [
+      { "category": "גמלאות כללי א", "repeated": 604 },
+      { "category": " גלש ומבוטח", "repeated": 591 },
+      { "category": "גורמי חוץ", "repeated": 220 },
+      { "category": "דלפק קדמי", "repeated": 92 },
+      { "category": " מרום", "repeated": 77 },
+      { "category": " מכתבים", "repeated": 48 },
+      { "category": " נכות כללית", "repeated": 10 },
+      { "category": "כספית כללית", "repeated": 7 },
+      { "category": "סיעוד", "repeated": 12994 }
+    ]
+  },
+  {
+    "id": "C2262492",
+    "name": "אוחנה רינת",
+    "responsibility": " סיעוד\r",
+    "operations": [
+      { "category": "דלפק קדמי", "repeated": 1000 },
+      { "category": "תשתיות גביה", "repeated": 63 },
+      { "category": " מכתבים", "repeated": 13 },
+      { "category": "גמלאות כללי א", "repeated": 2 },
+      { "category": "סיעוד", "repeated": 14140 }
+    ]
+  },
+  {
+    "id": "Z2780520",
+    "name": "אהרן גלית",
+    "responsibility": "פרויקטים\r",
+    "operations": [
+      { "category": "הבטחת הכנסה", "repeated": 760 },
+      { "category": "דלפק קדמי", "repeated": 187 },
+      { "category": " מרום", "repeated": 120 },
+      { "category": " גלש ומבוטח", "repeated": 117 },
+      { "category": "גמלאות כללי א", "repeated": 105 },
+      { "category": "ביטול חובות", "repeated": 61 },
+      { "category": "ועדות רפואיות", "repeated": 35 },
+      { "category": "גורמי חוץ", "repeated": 14 },
+      { "category": "כללי למשתמשים", "repeated": 12 },
+      { "category": " אוכלוסין", "repeated": 9 },
+      { "category": "ביטוח שכר", "repeated": 4 },
+      { "category": "אבטלה", "repeated": 117609 }
+    ]
+  },
+  {
+    "id": "Z2448291",
+    "name": "שער אלישבע",
+    "responsibility": " שיקום\r",
+    "operations": [
+      { "category": "זוש_חדש", "repeated": 49 },
+      { "category": " נכות כללית", "repeated": 38 },
+      { "category": "ועדות רפואיות", "repeated": 25 },
+      { "category": " גלש ומבוטח", "repeated": 14 },
+      { "category": "גמלאות כללי א", "repeated": 9 },
+      { "category": "כללי למשתמשים", "repeated": 6 },
+      { "category": "כספית כללית", "repeated": 6 },
+      { "category": " מכתבים", "repeated": 2 },
+      { "category": "שיקום", "repeated": 3561 }
+    ]
+  },
+  {
+    "id": "Z2856130",
+    "name": "ביתן תירצה ליאת",
+    "responsibility": " שיקום\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 211 },
+      { "category": "גמלאות כללי א", "repeated": 153 },
+      { "category": "דלפק קדמי", "repeated": 128 },
+      { "category": " מכתבים", "repeated": 120 },
+      { "category": "כספית כללית", "repeated": 119 },
+      { "category": " נפגעי איבה", "repeated": 52 },
+      { "category": " נכות כללית", "repeated": 12 },
+      { "category": " מרום", "repeated": 3 },
+      { "category": "שיקום", "repeated": 9070 }
+    ]
+  },
+  {
+    "id": "Z2947046",
+    "name": "קידר מיכל",
+    "responsibility": " שיקום\r",
+    "operations": [
+      { "category": "גמלאות כללי א", "repeated": 94 },
+      { "category": " גלש ומבוטח", "repeated": 34 },
+      { "category": "כספית כללית", "repeated": 6 },
+      { "category": "שיקום", "repeated": 2964 }
+    ]
+  },
+  {
+    "id": "Z6637936",
+    "name": "הראל ורד",
+    "responsibility": " שיקום\r",
+    "operations": [
+      { "category": " מכתבים", "repeated": 11 },
+      { "category": "גמלאות כללי א", "repeated": 8 },
+      { "category": "שיקום", "repeated": 474 }
+    ]
+  },
+  {
+    "id": "Z6662787",
+    "name": "פנחסוב חיה",
+    "responsibility": " שיקום\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 61 },
+      { "category": "גמלאות כללי א", "repeated": 59 },
+      { "category": " מכתבים", "repeated": 52 },
+      { "category": "כספית כללית", "repeated": 37 },
+      { "category": " נכות כללית", "repeated": 11 },
+      { "category": "דלפק קדמי", "repeated": 2 },
+      { "category": "שיקום", "repeated": 6067 }
+    ]
+  },
+  {
+    "id": "B1133510",
+    "name": "פישר סטערנא",
+    "responsibility": " שיקום\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 523 },
+      { "category": " מכתבים", "repeated": 381 },
+      { "category": "גמלאות כללי א", "repeated": 13 },
+      { "category": "שיקום", "repeated": 8492 }
+    ]
+  },
+  {
+    "id": "C0029701",
+    "name": "קראוס שרונה",
+    "responsibility": " שיקום\r",
+    "operations": [
+      { "category": " מכתבים", "repeated": 97 },
+      { "category": "שיקום", "repeated": 1299 }
+    ]
+  },
+  {
+    "id": "Z2780501",
+    "name": "חדד אורית",
+    "responsibility": "שירות מילואים ואבטלה\r",
+    "operations": [
+      { "category": "גמלאות כללי א", "repeated": 4115 },
+      { "category": " גלש ומבוטח", "repeated": 1974 },
+      { "category": "דלפק קדמי", "repeated": 938 },
+      { "category": " מרום", "repeated": 532 },
+      { "category": "ביטול חובות", "repeated": 453 },
+      { "category": "מעסיקים", "repeated": 61 },
+      { "category": "מרכז מידע", "repeated": 6 },
+      { "category": "כללי למשתמשים", "repeated": 2 },
+      { "category": "אבטלה", "repeated": 134353 }
+    ]
+  },
+  {
+    "id": "Z2876512",
+    "name": "ריג-ניאנו שאול",
+    "responsibility": "שירות מילואים ואבטלה\r",
+    "operations": [
+      { "category": "מילואים", "repeated": 21370 },
+      { "category": " גלש ומבוטח", "repeated": 3878 },
+      { "category": "גמלאות כללי א", "repeated": 2886 },
+      { "category": "ביטול חובות", "repeated": 418 },
+      { "category": " מרום", "repeated": 336 },
+      { "category": "דלפק קדמי", "repeated": 213 },
+      { "category": "תשתיות גביה", "repeated": 164 },
+      { "category": "כללי למשתמשים", "repeated": 14 },
+      { "category": "ועדות רפואיות", "repeated": 10 },
+      { "category": "אבטלה", "repeated": 86041 }
+    ]
+  },
+  {
+    "id": "Z5886926",
+    "name": "חבה חיים",
+    "responsibility": "שירות מילואים ואבטלה\r",
+    "operations": [
+      { "category": "מילואים", "repeated": 6221 },
+      { "category": "גמלאות כללי א", "repeated": 4264 },
+      { "category": " גלש ומבוטח", "repeated": 3154 },
+      { "category": "דלפק קדמי", "repeated": 753 },
+      { "category": " מרום", "repeated": 610 },
+      { "category": "ביטול חובות", "repeated": 104 },
+      { "category": "מעסיקים", "repeated": 4 },
+      { "category": "אבטלה", "repeated": 120330 }
+    ]
+  },
+  {
+    "id": "C0059137",
+    "name": "שמעון ברוך שני",
+    "responsibility": "שירות מילואים ואבטלה\r",
+    "operations": [
+      { "category": " גלש ומבוטח", "repeated": 11435 },
+      { "category": " מרום", "repeated": 1909 },
+      { "category": "דלפק קדמי", "repeated": 1231 },
+      { "category": "גמלאות כללי א", "repeated": 1187 },
+      { "category": " נכות כללית", "repeated": 200 },
+      { "category": "מעסיקים", "repeated": 116 },
+      { "category": "אמהות", "repeated": 21 },
+      { "category": "זוש_חדש", "repeated": 1 },
+      { "category": "אבטלה", "repeated": 82212 }
+    ]
+  },
+  { "id": "Z0365459", "name": "לב הניה", "responsibility": "תפקיד לא מוגדר\r", "operations": [{ "category": "ייעוץ לקשיש", "repeated": 4 }] },
+  {
+    "id": "Z0463469",
+    "name": "קרנביסר רחל-מאשה",
+    "responsibility": "תפקיד לא מוגדר\r",
+    "operations": [
+      { "category": "כללי למשתמשים", "repeated": 1 },
+      { "category": "ייעוץ לקשיש", "repeated": 4 }
+    ]
+  },
+  { "id": "Z4138123", "name": "אלפנדרי יעקב", "responsibility": "תפקיד לא מוגדר\r", "operations": [{ "category": "ייעוץ לקשיש", "repeated": 2 }] },
+  { "id": "Z5059405", "name": "נוימן חיה-שרה", "responsibility": "תפקיד לא מוגדר\r", "operations": [{ "category": "ייעוץ לקשיש", "repeated": 3 }] },
+  {
+    "id": "Z5094840",
+    "name": "פינקלשטיין מלכה-לאה",
+    "responsibility": "תפקיד לא מוגדר\r",
+    "operations": [{ "category": "ייעוץ לקשיש", "repeated": 2 }]
+  },
+  { "id": "Z5119345", "name": "שרייבר יונה-יפה", "responsibility": "תפקיד לא מוגדר\r", "operations": [{ "category": "ייעוץ לקשיש", "repeated": 4 }] },
+  { "id": "Z5333053", "name": "גרינפלד חנה-לאה", "responsibility": "תפקיד לא מוגדר\r", "operations": [{ "category": "ייעוץ לקשיש", "repeated": 3 }] },
+  {
+    "id": "C0394944",
+    "name": "רויטבלט ולדימיר",
+    "responsibility": "תפקיד לא מוגדר\r",
+    "operations": [{ "category": "שירותים רפואיים", "repeated": 118 }]
+  },
+  { "id": "C1284946", "name": "קריוצ-קוביץ מרינה", "responsibility": "תפקיד לא מוגדר\r", "operations": [{ "category": "סיעוד", "repeated": 3494 }] }
+]

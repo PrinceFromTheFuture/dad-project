@@ -5,17 +5,19 @@ function Setting({
   title,
   children,
   description,
+  varient = "default",
 }: {
-  description: string;
+  description?: string;
+  varient?: "default" | "minimal";
   title: string;
   children: React.ReactNode;
 }) {
   return (
-    <div className={cn(" w-full  py-5 border-b transition-all")}>
-      <div className=" flex justify-between items-center">
+    <div className={cn("w-full transition-all  py-5", varient === "default" && "  border-b ")}>
+      <div className={cn(" ", varient === "default" && "flex justify-between items-center")}>
         <div>
-            <h4 className=" text mb-1 font-medium">{title}</h4>
-            <h6 className=" text-muted-foreground text-sm">{description}</h6>
+          <h4 className={cn(" text mb-1 font-medium", varient === "minimal" && "mb-2")}>{title}</h4>
+          {varient === "default" && <h6 className=" text-muted-foreground text-sm">{description}</h6>}
         </div>
         {children}
       </div>

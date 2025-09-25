@@ -17,21 +17,10 @@ import {
 } from "@tanstack/react-table";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { agents } from "../../../agents";
 import { AgentView } from "@/types";
 
 // Define Agent interface
 
-// Sample data structure for agents
-const initialData: AgentView[] = agents.map((a) => {
-  return {
-    branch: "ירושלים",
-    name: a.name,
-    responsibility: a.responsibility,
-    nationalId: a.id,
-    operations: 100,
-  };
-});
 
 // Define column structure for the table
 const columns: ColumnDef<AgentView>[] = [

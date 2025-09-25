@@ -6,36 +6,17 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDropzone } from "react-dropzone";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Upload, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
 // Define the form schema
 const formSchema = z.object({
-  nickname: z
-    .string()
-    .min(1, "Session nickname is required")
-    .max(15, "session nickname should not be too long"),
+  nickname: z.string().min(1, "Session nickname is required").max(15, "session nickname should not be too long"),
   month: z.string().min(1, "Month is required"),
   year: z.string().min(1, "Year is required"),
   files: z.array(z.instanceof(File)).optional(),
@@ -105,7 +86,7 @@ export function NewSession({ trigger }: NewSessionDialogProps) {
       form.reset();
       setFiles([]);
       setOpen(false);
-      
+
       router.push(`/dashboard/sessions/${res.sessionId}`);
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -145,7 +126,8 @@ export function NewSession({ trigger }: NewSessionDialogProps) {
         <DialogHeader>
           <DialogTitle>Create New Session</DialogTitle>
           <DialogDescription>
-            Enter the session details and attach the reports from by the <span className=" text-blue-600 font-semibold">Bituach Leumi</span> main-frame.
+            Enter the session details and attach the reports from by the <span className=" text-blue-600 font-semibold">Bituach Leumi</span>{" "}
+            main-frame.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -157,7 +139,7 @@ export function NewSession({ trigger }: NewSessionDialogProps) {
                 <FormItem>
                   <FormLabel>Session Nickname</FormLabel>
                   <FormControl>
-                    <Input max={15} placeholder="Enter a nickname for the session" {...field} />
+                    <Input placeholder="Enter a nickname for the session" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -235,9 +217,7 @@ export function NewSession({ trigger }: NewSessionDialogProps) {
                         <div className="flex flex-col items-center justify-center text-center">
                           <Upload className="size-6 text-muted-foreground mb-2" />
                           <p className="text-sm text-muted-foreground mb-1">
-                            {isDragActive
-                              ? "Drop the files here ..."
-                              : "Drag & drop TXT files here, or click to select"}
+                            {isDragActive ? "Drop the files here ..." : "Drag & drop TXT files here, or click to select"}
                           </p>
                           <p className="text-xs text-muted-foreground">Supports multiple TXT files</p>
                         </div>
