@@ -5,7 +5,9 @@ import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { RolesSelect, Setting } from "@/payload-types";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Grid2x2, GripVertical } from "lucide-react";
 
 interface Label {
   id: string;
@@ -41,24 +43,25 @@ function Draggable({ id, children, onClick }: DraggableProps) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id,
   });
-
+  const buttonVarient = buttonVariants({ size: "sm", variant: "outline" });
   return (
     <button
       ref={setNodeRef}
+      className={cn("transition-none", buttonVarient, "transition-none cursor-grabbing")}
       type="button"
-      className="px-2 py-1 m-1 bg-gray-100 border border-gray-300 rounded cursor-grab"
       style={{ transform: CSS.Translate.toString(transform) }}
       {...listeners}
       {...attributes}
       onClick={onClick}
     >
+      <GripVertical />
       {children}
     </button>
   );
 }
 
 function Droppable({ id, children, title, onRename, isInitialPool = false }: DroppableProps) {
-  const { isOver, setNodeRef } = useDroppable({
+  const { setNodeRef } = useDroppable({
     id,
   });
 
@@ -80,23 +83,26 @@ function Droppable({ id, children, title, onRename, isInitialPool = false }: Dro
   return (
     <div>
       {!isInitialPool && (
-        <div className="flex items-center gap-2 w-full">
-          <Input type="text" value={groupName} onChange={(e) => handleRename(e.target.value)} className="w-min" />
+        <div className="flex items-center gap-2 w-full ml-4 mb-4">
+          <Input
+            type="text"
+            value={groupName}
+            onChange={(e) => handleRename(e.target.value)}
+            className="w-min"
+          />
         </div>
       )}
       {isInitialPool && (
         <div className="flex items-center gap-2 w-full">
-          <h3 className="text-lg font-semibold">{title}</h3>
+          <h3 className="text-lg font-semibold ">{title}</h3>
         </div>
       )}
       <div
         ref={setNodeRef}
-        className={`min-h-44 w-full p-2 m-2 border-2 border-dashed border-gray-300 rounded-lg ${
-          id === "available" ? "bg-gray-100" : "bg-amber-100"
-        } ${isOver ? "opacity-100" : "opacity-50"}`}
+        className={`min-h-44 w-full p-4  rounded-lg ${id !== "available" && "bg-sidebar"} `}
       >
-        <div className="flex flex-col items-center gap-2 h-full">
-          <div className="flex flex-wrap gap-2 justify-center">{children}</div>
+        <div className="flex flex-col items-start gap-2 h-full">
+          <div className={cn("flex flex-wrap gap-2 justify-start")}>{children}</div>
         </div>
       </div>
     </div>
@@ -107,15 +113,17 @@ export function Example({ setting, onUpdate, roles }: ExampleProps) {
   const [droppedItems, setDroppedItems] = useState<Record<string, string[]>>({
     available: Array.from(new Set(roles.map((label: Label) => label.id))),
   });
-  const [groupNames, setGroupNames] = useState<Map<string, string>>(new Map([["available", "Available Items"]]));
+  const [groupNames, setGroupNames] = useState<Map<string, string>>(
+    new Map([["available", "Available Agent Roles"]])
+  );
 
   // Initialize group names and dropped items from settings
   useEffect(() => {
-    const newGroupNames = new Map<string, string>([["available", "Available Items"]]);
+    const newGroupNames = new Map<string, string>([["available", "Available Agent Roles"]]);
     const newDroppedItems: Record<string, string[]> = { available: [] };
     const seenItems = new Set<string>();
 
-    // Initialize available items
+    // Initialize available Agent Roles
     roles.forEach((role) => {
       newDroppedItems.available.push(role.id);
     });
@@ -124,7 +132,8 @@ export function Example({ setting, onUpdate, roles }: ExampleProps) {
     setting?.forEach((category) => {
       if (category.id && category.data && category.data.length > 0) {
         const firstItem = category.data[0];
-        const name = typeof firstItem === "string" ? firstItem : (firstItem as Role).name || "Unnamed Category";
+        const name =
+          typeof firstItem === "string" ? firstItem : (firstItem as Role).name || "Unnamed Category";
         if (newGroupNames.has(category.id)) {
           console.warn(`Duplicate category ID found: ${category.id}`);
         }
@@ -271,7 +280,11 @@ export function Example({ setting, onUpdate, roles }: ExampleProps) {
           Add New Group
         </Button>
         <div className="flex flex-col gap-4">
-          <Droppable id="available" title={groupNames.get("available") || "Available Items"} isInitialPool={true}>
+          <Droppable
+            id="available"
+            title={groupNames.get("available") || "Available Agent Roles"}
+            isInitialPool={true}
+          >
             {droppedItems["available"]?.map((id) => (
               <Draggable key={id} id={id}>
                 {roles.find((l: Label) => l.id === id)?.name || "Unknown Label"}
@@ -283,7 +296,12 @@ export function Example({ setting, onUpdate, roles }: ExampleProps) {
             {Array.from(groupNames.keys())
               .filter((id) => id !== "available")
               .map((id) => (
-                <Droppable key={id} id={id} title={groupNames.get(id) || "Unnamed Category"} onRename={handleRenameGroup}>
+                <Droppable
+                  key={id}
+                  id={id}
+                  title={groupNames.get(id) || "Unnamed Category"}
+                  onRename={handleRenameGroup}
+                >
                   {droppedItems[id]?.map((itemId) => (
                     <Draggable key={itemId} id={itemId} onClick={() => handleItemClick(itemId, id)}>
                       {roles.find((l: Label) => l.id === itemId)?.name || "Unknown Label"}
