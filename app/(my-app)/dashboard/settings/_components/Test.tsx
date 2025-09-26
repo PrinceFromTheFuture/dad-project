@@ -61,7 +61,7 @@ function Draggable({ id, children, onClick }: DraggableProps) {
 }
 
 function Droppable({ id, children, title, onRename, isInitialPool = false }: DroppableProps) {
-  const { setNodeRef } = useDroppable({
+  const { isOver, setNodeRef } = useDroppable({
     id,
   });
 
@@ -102,7 +102,7 @@ function Droppable({ id, children, title, onRename, isInitialPool = false }: Dro
         className={`min-h-44 w-full p-4  rounded-lg ${id !== "available" && "bg-sidebar"} `}
       >
         <div className="flex flex-col items-start gap-2 h-full">
-          <div className={cn("flex flex-wrap gap-2 justify-start")}>{children}</div>
+          <div className={cn("flex flex-wrap gap-2 justify-start", isOver && "bg-red-500")}>{children}</div>
         </div>
       </div>
     </div>
