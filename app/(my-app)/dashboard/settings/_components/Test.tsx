@@ -7,7 +7,8 @@ import { RolesSelect, Setting } from "@/payload-types";
 import { Input } from "@/components/ui/input";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Grid2x2, GripVertical } from "lucide-react";
+import { Edit, Grid2x2, GripVertical } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Label {
   id: string;
@@ -47,14 +48,14 @@ function Draggable({ id, children, onClick }: DraggableProps) {
   return (
     <button
       ref={setNodeRef}
-      className={cn("transition-none", buttonVarient, "transition-none cursor-grabbing")}
+      className={cn("", buttonVarient, "transition-none text-sm font-medium cursor-grabbing")}
       type="button"
       style={{ transform: CSS.Translate.toString(transform) }}
       {...listeners}
       {...attributes}
       onClick={onClick}
     >
-      <GripVertical />
+      <GripVertical className="size-4" />
       {children}
     </button>
   );
@@ -82,28 +83,34 @@ function Droppable({ id, children, title, onRename, isInitialPool = false }: Dro
 
   return (
     <div>
-      {!isInitialPool && (
-        <div className="flex items-center gap-2 w-full ml-4 mb-4">
-          <Input
-            type="text"
-            value={groupName}
-            onChange={(e) => handleRename(e.target.value)}
-            className="w-min"
-          />
-        </div>
-      )}
       {isInitialPool && (
         <div className="flex items-center gap-2 w-full">
-          <h3 className="text-lg font-semibold ">{title}</h3>
+          <h3 className="text-lg font-semibold">{title}</h3>
         </div>
       )}
       <div
         ref={setNodeRef}
-        className={`min-h-44 w-full p-4  rounded-lg ${id !== "available" && "bg-sidebar"} `}
+        className={cn(
+          "min-h-44 w-full p-4 rounded-lg transition-all",
+          id !== "available" && "bg-sidebar border-0 border-dashed border-primary",
+          id !== "available" && isOver && "bg-primary/5 border-2"
+        )}
       >
-        <div className="flex flex-col items-start gap-2 h-full">
-          <div className={cn("flex flex-wrap gap-2 justify-start", isOver && "bg-red-500")}>{children}</div>
-        </div>
+        {!isInitialPool && (
+          <div className="flex items-center justify-between mb-3 w-full">
+            <Input
+              type="text"
+              value={groupName}
+              onChange={(e) => handleRename(e.target.value)}
+              className="w-min bg-white"
+            />
+            <Button variant={"outline"}>
+              <Edit />
+            </Button>
+          </div>
+        )}
+
+        <div className={cn("flex flex-wrap gap-2 justify-start")}>{children}</div>
       </div>
     </div>
   );
@@ -116,6 +123,21 @@ export function Example({ setting, onUpdate, roles }: ExampleProps) {
   const [groupNames, setGroupNames] = useState<Map<string, string>>(
     new Map([["available", "Available Agent Roles"]])
   );
+
+  // Function to trigger onUpdate with complete group data
+  const triggerUpdate = (items: Record<string, string[]>) => {
+    const categoriesGroups: Setting["categoriesGroups"] = Object.entries(items)
+      .filter(([id]) => id !== "available")
+      .map(([id, itemIds]) => ({
+        id,
+        data: itemIds.map((itemId) => {
+          const role = roles.find((r: Role) => r.id === itemId);
+          return role ? { id: role.id, name: role.name } : itemId;
+        }),
+        name: groupNames.get(id) || `Group ${id}`,
+      }));
+    onUpdate(categoriesGroups);
+  };
 
   // Initialize group names and dropped items from settings
   useEffect(() => {
@@ -131,13 +153,7 @@ export function Example({ setting, onUpdate, roles }: ExampleProps) {
     // Process settings to populate groups
     setting?.forEach((category) => {
       if (category.id && category.data && category.data.length > 0) {
-        const firstItem = category.data[0];
-        const name =
-          typeof firstItem === "string" ? firstItem : (firstItem as Role).name || "Unnamed Category";
-        if (newGroupNames.has(category.id)) {
-          console.warn(`Duplicate category ID found: ${category.id}`);
-        }
-        newGroupNames.set(category.id, name);
+        newGroupNames.set(category.id, category.name || `Group ${category.id}`);
         newDroppedItems[category.id] = [];
 
         // Add items to the group, ensuring no duplicates
@@ -146,7 +162,6 @@ export function Example({ setting, onUpdate, roles }: ExampleProps) {
           if (!seenItems.has(itemId)) {
             newDroppedItems[category.id].push(itemId);
             seenItems.add(itemId);
-            // Remove from available if present
             newDroppedItems.available = newDroppedItems.available.filter((id) => id !== itemId);
           }
         });
@@ -155,27 +170,8 @@ export function Example({ setting, onUpdate, roles }: ExampleProps) {
 
     setGroupNames(newGroupNames);
     setDroppedItems(newDroppedItems);
+    triggerUpdate(newDroppedItems);
   }, [setting, roles]);
-
-  // Transform droppedItems to categoriesGroups format and notify parent
-  useEffect(() => {
-    const categoriesGroups: Setting["categoriesGroups"] = Object.entries(droppedItems)
-      .filter(([id]) => id !== "available")
-      .map(([id, items]) => ({
-        id,
-        data: items.map((itemId) => {
-          const label = roles.find((l: Label) => l.id === itemId);
-          return label ? { id: label.id, name: label.name } : itemId;
-        }),
-      }));
-    onUpdate(categoriesGroups);
-  }, [droppedItems, onUpdate, roles]);
-
-  // Check for duplicate labels
-  const uniqueLabels = Array.from(new Set(roles.map((label: Label) => label.id)));
-  if (uniqueLabels.length !== roles.length) {
-    console.warn("Duplicate label IDs found:", roles);
-  }
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -213,6 +209,7 @@ export function Example({ setting, onUpdate, roles }: ExampleProps) {
         }
       });
 
+      triggerUpdate(newState);
       return newState;
     });
   };
@@ -221,12 +218,13 @@ export function Example({ setting, onUpdate, roles }: ExampleProps) {
     setGroupNames((prev) => {
       const newNames = new Map(prev);
       newNames.set(id, newName);
+      triggerUpdate(droppedItems);
       return newNames;
     });
   };
 
   const handleItemClick = (itemId: string, groupId: string) => {
-    if (groupId === "available") return; // Do nothing if clicking in the initial pool
+    if (groupId === "available") return;
 
     setDroppedItems((prev) => {
       const newState = { ...prev };
@@ -252,24 +250,50 @@ export function Example({ setting, onUpdate, roles }: ExampleProps) {
         });
       }
 
+      triggerUpdate(newState);
       return newState;
     });
   };
 
   const addNewGroup = () => {
-    // Limit to 20 groups (excluding "available")
     if (groupNames.size >= 21) {
       return;
     }
     const newGroupId = `group-${Date.now()}`;
-    setDroppedItems((prev) => ({
-      ...prev,
-      [newGroupId]: [],
-    }));
+    setDroppedItems((prev) => {
+      const newState = {
+        ...prev,
+        [newGroupId]: [],
+      };
+      triggerUpdate(newState);
+      return newState;
+    });
     setGroupNames((prev) => {
       const newNames = new Map(prev);
       newNames.set(newGroupId, `New Group ${newNames.size}`);
       return newNames;
+    });
+  };
+
+  const deleteGroup = (groupId: string) => {
+    if (groupId === "available") return;
+
+    setDroppedItems((prev) => {
+      const newState = { ...prev };
+      const itemsToMove = newState[groupId] || [];
+
+      // Move items back to available pool
+      newState.available = [...newState.available, ...itemsToMove];
+      delete newState[groupId];
+
+      setGroupNames((prevNames) => {
+        const newNames = new Map(prevNames);
+        newNames.delete(groupId);
+        return newNames;
+      });
+
+      triggerUpdate(newState);
+      return newState;
     });
   };
 
@@ -296,18 +320,27 @@ export function Example({ setting, onUpdate, roles }: ExampleProps) {
             {Array.from(groupNames.keys())
               .filter((id) => id !== "available")
               .map((id) => (
-                <Droppable
-                  key={id}
-                  id={id}
-                  title={groupNames.get(id) || "Unnamed Category"}
-                  onRename={handleRenameGroup}
-                >
-                  {droppedItems[id]?.map((itemId) => (
-                    <Draggable key={itemId} id={itemId} onClick={() => handleItemClick(itemId, id)}>
-                      {roles.find((l: Label) => l.id === itemId)?.name || "Unknown Label"}
-                    </Draggable>
-                  ))}
-                </Droppable>
+                <div key={id} className="relative">
+                  <Droppable
+                    id={id}
+                    title={groupNames.get(id) || "Unnamed Category"}
+                    onRename={handleRenameGroup}
+                  >
+                    {droppedItems[id]?.map((itemId) => (
+                      <Draggable key={itemId} id={itemId} onClick={() => handleItemClick(itemId, id)}>
+                        {roles.find((l: Label) => l.id === itemId)?.name || "Unknown Label"}
+                      </Draggable>
+                    ))}
+                  </Droppable>
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    className="absolute top-2 right-2"
+                    onClick={() => deleteGroup(id)}
+                  >
+                    Delete
+                  </Button>
+                </div>
               ))}
           </div>
         </div>
