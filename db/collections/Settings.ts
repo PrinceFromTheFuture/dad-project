@@ -23,7 +23,10 @@ const Settings: CollectionConfig = {
     {
       type: "array",
       name: "categoriesGroups",
-      fields: [{ name: "data", type: "relationship", hasMany: true, relationTo: "roles" }],
+      fields: [
+        { name: "data", type: "relationship", hasMany: true, relationTo: "roles" },
+        { name: "groupName", type: "text" },
+      ],
     },
 
     {

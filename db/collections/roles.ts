@@ -2,6 +2,9 @@ import { CollectionConfig } from "payload";
 
 const Roles: CollectionConfig = {
   slug: "roles",
+  admin:{
+    useAsTitle:'name'
+  },
   access: {
     read: () => true,
     create: () => true,

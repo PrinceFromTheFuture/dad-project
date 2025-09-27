@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField } from "@/components/ui/form";
 import axios from "axios";
-import { Example } from "./Test";
+import { CategoriesGroups } from "./CategoriesGroups";
 
 const settingsSchema = z.object({
   mode: z.enum(["unified", "splited"]),
@@ -26,6 +26,8 @@ function UpdateSetting({ setting, roles }: { setting: SettingsType; roles: Role[
     },
   });
 
+  const formData = form.watch();
+
   const handleApiUpdate = async (data: FormType) => {
     try {
       await axios.patch(`/api/settings/${setting.id}`, data); // No Authorization header
@@ -34,6 +36,9 @@ function UpdateSetting({ setting, roles }: { setting: SettingsType; roles: Role[
     }
   };
 
+  const handleCategoriesGroupsChange = async (data: SettingsType["categoriesGroups"]) => {
+    console.log(data);
+  };
   useEffect(() => {
     form.setValue("mode", setting.mode);
     form.setValue("sorting", setting.sorting);
@@ -46,7 +51,10 @@ function UpdateSetting({ setting, roles }: { setting: SettingsType; roles: Role[
           control={form.control}
           name="sorting"
           render={({ field }) => (
-            <Setting title="Sorting Agents In Report" description="Choose how agents are sorted within a report">
+            <Setting
+              title="Sorting Agents In Report"
+              description="Choose how agents are sorted within a report"
+            >
               <FormControl>
                 <Select
                   onValueChange={(value) => {
@@ -72,7 +80,19 @@ function UpdateSetting({ setting, roles }: { setting: SettingsType; roles: Role[
           control={form.control}
           name="mode"
           render={({ field }) => (
-            <Setting title="Export Mode" description="Choose the export mode for reports">
+            <Setting
+              addiotionalInfo={
+                formData.mode === "splited" && (
+                  <CategoriesGroups
+                    roles={roles}
+                    setting={setting.categoriesGroups}
+                    onUpdate={handleCategoriesGroupsChange}
+                  />
+                )
+              }
+              title="Export Mode"
+              description="Choose the export mode for reports"
+            >
               <FormControl>
                 <Select
                   onValueChange={(value) => {
@@ -95,13 +115,6 @@ function UpdateSetting({ setting, roles }: { setting: SettingsType; roles: Role[
           )}
         />
       </form>
-      <Example
-        roles={roles}
-        setting={setting.categoriesGroups}
-        onUpdate={(data) => {
-          console.log(data);
-        }}
-      />
     </Form>
   );
 }

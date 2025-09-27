@@ -164,6 +164,7 @@ export interface Setting {
   categoriesGroups?:
     | {
         data?: (string | Role)[] | null;
+        groupName?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -371,6 +372,7 @@ export interface SettingsSelect<T extends boolean = true> {
     | T
     | {
         data?: T;
+        groupName?: T;
         id?: T;
       };
   sorting?: T;
