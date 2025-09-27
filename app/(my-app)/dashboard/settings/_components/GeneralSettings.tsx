@@ -25,7 +25,7 @@ function GeneralSettings({ branches, settings, roles }: { roles: Role[]; branche
         >
           <Switch checked={isSameForAllBranches} onCheckedChange={setIsSameForAllBranches} />
         </Setting>
-        {isSameForAllBranches && <UpdateSetting setting={settings.find((set) => set.id === GLOBAL_SETTINGS_ID)!} />}
+        {isSameForAllBranches && <UpdateSetting roles={roles} setting={settings.find((set) => set.id === GLOBAL_SETTINGS_ID)!} />}
       </SettingsSection>
       {!isSameForAllBranches && (
         <SettingsSection title="Branches ">

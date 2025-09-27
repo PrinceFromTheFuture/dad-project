@@ -61,27 +61,48 @@ function Droppable({ id, children, title, onRename, isInitialPool = false }: Dro
   });
 
   const [groupName, setGroupName] = useState(title);
+  const [tempGroupName, setTempGroupName] = useState(title); // Temporary state for input
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleRename = (newVal: string) => {
-    setGroupName(newVal);
-    if (onRename) {
-      onRename(id, newVal);
-    }
-  };
+  // Sync local groupName with title prop when it changes
+  useEffect(() => {
+    setGroupName(title);
+    setTempGroupName(title);
+  }, [title]);
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
+    if (isEditing) {
+      // When exiting edit mode, update parent state
+      if (onRename && tempGroupName !== groupName) {
+        onRename(id, tempGroupName);
+      }
+      setGroupName(tempGroupName);
+    }
   };
 
   const handleInputBlur = () => {
     setIsEditing(false);
+    // Update parent state on blur if name changed
+    if (onRename && tempGroupName !== groupName) {
+      onRename(id, tempGroupName);
+    }
+    setGroupName(tempGroupName);
   };
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       setIsEditing(false);
+      // Update parent state on Enter if name changed
+      if (onRename && tempGroupName !== groupName) {
+        onRename(id, tempGroupName);
+      }
+      setGroupName(tempGroupName);
     }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTempGroupName(e.target.value); // Update temporary state only
   };
 
   return (
@@ -90,19 +111,19 @@ function Droppable({ id, children, title, onRename, isInitialPool = false }: Dro
       <div
         ref={setNodeRef}
         className={cn(
-          "min-h-44  w-full p-0 rounded-lg",
-          id !== "available" && "bg-sidebar p-4 border-2 border-dashed  ",
+          "min-h-44 w-full p-0 rounded-lg",
+          id !== "available" && "bg-sidebar p-4 border-2 border-dashed",
           id !== "available" && isOver && "bg-primary/5 border-2 border-primary"
         )}
       >
         {!isInitialPool && (
-          <div onClick={handleEditToggle} className="flex  items-center gap-2 mb-4  w-full">
-            <div className=" flex w-min gap-2 flex-row-reverse items-center whitespace-nowrap">
+          <div onClick={handleEditToggle} className="flex items-center gap-2 mb-4 w-full">
+            <div className="flex w-min gap-2 flex-row-reverse items-center whitespace-nowrap">
               {isEditing ? (
                 <Input
                   type="text"
-                  value={groupName}
-                  onChange={(e) => handleRename(e.target.value)}
+                  value={tempGroupName}
+                  onChange={handleInputChange}
                   onBlur={handleInputBlur}
                   onKeyDown={handleInputKeyDown}
                   className="w-min bg-white"

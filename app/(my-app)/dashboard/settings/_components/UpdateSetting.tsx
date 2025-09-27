@@ -37,7 +37,11 @@ function UpdateSetting({ setting, roles }: { setting: SettingsType; roles: Role[
   };
 
   const handleCategoriesGroupsChange = async (data: SettingsType["categoriesGroups"]) => {
-    console.log(data);
+      try {
+      await axios.patch(`/api/settings/${setting.id}`, {categoriesGroups:data}); // No Authorization header
+    } catch (error) {
+      console.error("Error updating settings:", error);
+    }
   };
   useEffect(() => {
     form.setValue("mode", setting.mode);
