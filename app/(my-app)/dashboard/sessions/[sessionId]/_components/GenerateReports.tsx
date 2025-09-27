@@ -24,34 +24,28 @@ type ReportFormType = z.infer<typeof reportSchema>;
 function GenerateReports({
   trigger,
   branches,
+  sessionId,
 }: {
   trigger: React.ReactNode;
-
+  sessionId: string;
   branches: Branch[]; // List of branches
 }) {
   const form = useForm<ReportFormType>({
     resolver: zodResolver(reportSchema),
     defaultValues: {
       mergeAllBranches: true,
-      branch: undefined,
+      branch: branches[0].id,
     },
   });
 
   const formData = form.watch();
 
-  const handleApiUpdate = async (data: Partial<ReportFormType>) => {
-    try {
-      await axios.patch(`/api/settings/${setting.id}`, data);
-      // Optionally trigger report generation API call here
-    } catch (error) {
-      console.error("Error updating settings:", error);
-    }
-  };
+
 
   const handleGenerateReport = async () => {
     try {
       const data = form.getValues();
-      await axios.post("/api/reports/generate", data); // Example endpoint for report generation
+      await axios.post(`/localapi/sessions/generate/${sessionId}`, data); // Example endpoint for report generation
       // Optionally close dialog or show success message
     } catch (error) {
       console.error("Error generating report:", error);
@@ -78,7 +72,10 @@ function GenerateReports({
                 control={form.control}
                 name="mergeAllBranches"
                 render={({ field }) => (
-                  <Setting title="Merge All Branches" description="Enable to include all branches in the report; disable to select a specific branch">
+                  <Setting
+                    title="Merge All Branches"
+                    description="Enable to include all branches in the report; disable to select a specific branch"
+                  >
                     <FormControl>
                       <Switch
                         checked={field.value}
@@ -91,7 +88,6 @@ function GenerateReports({
                           if (checked) {
                             updatedData.branch = undefined;
                           }
-                          handleApiUpdate(updatedData);
                         }}
                       />
                     </FormControl>
@@ -108,8 +104,6 @@ function GenerateReports({
                         <Select
                           onValueChange={(value) => {
                             field.onChange(value);
-                            const updatedData = { ...form.getValues(), branch: value };
-                            handleApiUpdate(updatedData);
                           }}
                           value={field.value}
                         >

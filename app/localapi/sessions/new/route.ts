@@ -13,7 +13,7 @@ const RequestBodySchema = z.object({
   year: z.number(),
 });
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest) {  
   try {
     // Parse the multipart/form-data request
     const formData = await req.formData();

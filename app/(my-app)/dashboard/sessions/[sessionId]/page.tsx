@@ -1,4 +1,3 @@
-import { branches } from "@/app/(my-app)/constants";
 import AgentsTable from "@/components/branches/AgentsTable";
 import BranchesTable from "@/components/branches/BranchesTable";
 import OperationsTable from "@/components/branches/OperationsTable";
@@ -16,6 +15,9 @@ import Link from "next/link";
 import React from "react";
 import SelectSession from "./_components/SelectSession";
 import GenerateReports from "./_components/GenerateReports";
+
+export const dynamic = "force-dynamic";
+
 
 async function page({ params }: { params: Promise<{ sessionId: string }> }) {
   const { sessionId } = await params;
@@ -91,7 +93,8 @@ const f = reports.docs
         <div className=" flex gap-4">
           <SelectSession defaultSessionId={sessionId} sessions={allSessions} />
           <GenerateReports
-          branches={reports.docs.map((report)=>report.branch)}
+          branches={reports.docs.map((report)=>report.branch as Branch)}
+          sessionId={sessionId}
             trigger={
               <Button size={"lg"} className=" flex gap-2 cursor-pointer items-center ">
                 Export PDF

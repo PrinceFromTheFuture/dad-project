@@ -6,6 +6,9 @@ import { Switch } from "@/components/ui/switch";
 import GeneralSettings from "./_components/GeneralSettings";
 import getPayload from "@/lib/getPayload";
 
+export const dynamic = "force-dynamic";
+
+
 async function page() {
   const payload = await getPayload();
   const { docs: branches } = await payload.find({ collection: "branches", pagination: false });
