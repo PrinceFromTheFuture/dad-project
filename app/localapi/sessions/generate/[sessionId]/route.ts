@@ -1,4 +1,4 @@
-import generatePDFreport from "@/lib/generatePDFreport";
+import generatePDFreport from "@/lib/generatePDFReport/generatePDFreport";
 import getPayload from "@/lib/getPayload";
 import { Branch, Media, Setting } from "@/payload-types";
 import { Agent } from "@/types";
@@ -50,7 +50,17 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ ses
     const branchSettings = branch.settings as Setting;
     const reportData = report.agents as Media;
     if (branchSettings.mode === "unified") {
-      generatePDFreport(branchSettings.sorting, reportData.url!);
+      const reportBytes = await generatePDFreport(branchSettings.sorting, reportData.url!);
+      const headers = new Headers({
+        "Content-Type": "application/pdf",
+        "Content-Disposition": "attachment; filename=example.pdf",
+        "Content-Length": reportBytes.byteLength.toString(),
+      });
+
+      return new NextResponse(reportBytes, {
+        status: 200,
+        headers,
+      });
     }
   }
   return NextResponse.json({ success: true });

@@ -1,69 +1,64 @@
-import fs from 'fs'
-import PDFDocument from "pdfkit";
+import fs from "fs";
 import { CONFIG } from "./conf";
+import { PDFDocument, PDFFont, PDFPage, rgb } from "pdf-lib";
 
 interface PdfConfig {
-  doc: PDFKit.PDFDocument;
+  page: PDFPage;
   pageTitle: string;
-  pageNo: number;
-  titleNo: number;
-}
-interface Point {
-  x: number;
-  y: number;
+  font: PDFFont;
+  document: PDFDocument;
 }
 
-export function initializePage({ doc, pageTitle }: PdfConfig): void {
-  // Draw top and bottom borders
-  doc
-    .rect(
-      CONFIG.dimensions.mainContentSideMargin,
-      CONFIG.dimensions.mainContentTopMargin,
-      CONFIG.dimensions.innerWidth,
-      CONFIG.dimensions.borderHeight
-    )
-    .fill(CONFIG.colors.primary);
+export async function initializePage({ page, pageTitle, font, document }: PdfConfig) {
+  page.drawRectangle({
+    x: CONFIG.dimensions.mainContentSideMargin,
+    y: CONFIG.dimensions.page.height - CONFIG.dimensions.mainContentTopMargin - 3,
+    width: CONFIG.dimensions.innerWidth,
+    height: 3,
+    color: CONFIG.colors.primary,
+  });
 
-  doc
-    .rect(
-      CONFIG.dimensions.mainContentSideMargin,
-      doc.page.height - CONFIG.dimensions.mainContentTopMargin,
-      CONFIG.dimensions.innerWidth,
-      CONFIG.dimensions.borderHeight
-    )
-    .fill(CONFIG.colors.primary);
+  page.drawRectangle({
+    x: CONFIG.dimensions.mainContentSideMargin,
+    y: CONFIG.dimensions.mainContentTopMargin,
+    width: CONFIG.dimensions.innerWidth,
+    height: 3,
+    color: CONFIG.colors.primary,
+  });
+  const logo = await fetch(CONFIG.logo.buffer).then((res) => res.arrayBuffer());
+  page.drawImage(await document.embedPng(logo), {
+    x: CONFIG.dimensions.page.width / 2 - CONFIG.logo.width / 2,
+    y: CONFIG.dimensions.mainContentTopMargin / 2 - CONFIG.logo.hight / 2,
+    width: CONFIG.logo.width,
+    height: CONFIG.logo.hight,
+  });
 
-  // Draw page title
-  doc.font(CONFIG.font.bold).fontSize(CONFIG.font.sizes.large);
-
-  const circleRadius = 35;
-  const circleCenter: Point = {
-    x: CONFIG.dimensions.mainContentSideMargin + circleRadius + CONFIG.dimensions.featureMargin,
-    y: CONFIG.dimensions.mainContentTopMargin - CONFIG.dimensions.featureMargin - circleRadius,
-  };
-
-  doc.circle(circleCenter.x, circleCenter.y, circleRadius).fill("#D9D9D9");
-  doc.fillColor("#000000");
-
-  doc.text(pageTitle, circleCenter.x + circleRadius + CONFIG.dimensions.innerBoxMargin, circleCenter.y - circleRadius / 2);
-  doc.font(CONFIG.font.bold).fontSize(CONFIG.font.sizes.regular);
-
-  const textWidth = doc.widthOfString("2");
-  const textHeight = doc.currentLineHeight();
-
-  doc.text("2", circleCenter.x - textWidth / 2, circleCenter.y - textHeight / 2 + 3);
-
-  doc.font(CONFIG.font.regular).fontSize(CONFIG.font.sizes.regular);
-
-  // Add logo if it exists
-  if (fs.existsSync(CONFIG.logo.path)) {
-    doc.image(
-      CONFIG.logo.path,
-      doc.page.width / 2 - CONFIG.logo.width / 2,
-      doc.page.height - CONFIG.dimensions.mainContentTopMargin + CONFIG.dimensions.mainContentSideMargin / 2,
-      { width: CONFIG.logo.width }
-    );
-  } else {
-    console.warn("Logo file not found at ${CONFIG.logo.path}");
-  }
+  page.drawCircle({
+    color: rgb(0.86, 0.86, 0.86),
+    x: CONFIG.dimensions.mainContentSideMargin + CONFIG.dimensions.innerWidth - 70,
+    y: CONFIG.dimensions.page.height - CONFIG.dimensions.mainContentTopMargin + 65,
+    size: 30,
+  });
+  page.drawText(pageTitle, {
+    color: rgb(0, 0, 0),
+    x:
+      CONFIG.dimensions.mainContentSideMargin +
+      CONFIG.dimensions.innerWidth -
+      font.widthOfTextAtSize(pageTitle, 38) -
+      130,
+    y: CONFIG.dimensions.page.height - CONFIG.dimensions.mainContentTopMargin + 54,
+    size: 38,
+    font,
+  });
+  page.drawText("1", {
+    color: rgb(0, 0, 0),
+    x:
+      CONFIG.dimensions.mainContentSideMargin +
+      CONFIG.dimensions.innerWidth -
+      font.widthOfTextAtSize("1", 28) -
+      63,
+    y: CONFIG.dimensions.page.height - CONFIG.dimensions.mainContentTopMargin + 54,
+    size: 28,
+    font: font,
+  });
 }

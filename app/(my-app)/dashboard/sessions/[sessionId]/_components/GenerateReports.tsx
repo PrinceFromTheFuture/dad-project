@@ -33,20 +33,35 @@ function GenerateReports({
   const form = useForm<ReportFormType>({
     resolver: zodResolver(reportSchema),
     defaultValues: {
-      mergeAllBranches: true,
+      mergeAllBranches: false,
       branch: branches[0].id,
     },
   });
 
   const formData = form.watch();
 
-
+  const downloadPDF = (blob: Blob, filename: string) => {
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    link.click();
+    document.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  };
 
   const handleGenerateReport = async () => {
     try {
       const data = form.getValues();
-      await axios.post(`/localapi/sessions/generate/${sessionId}`, data); // Example endpoint for report generation
+      const response = await axios.post(`/localapi/sessions/generate/${sessionId}`, data, {
+        responseType: "blob",
+      }); // Example endpoint for report generation
       // Optionally close dialog or show success message
+
+      // Create filename with current timestamp
+
+      // Download the PDF
+      downloadPDF(response.data, "example");
     } catch (error) {
       console.error("Error generating report:", error);
     }
