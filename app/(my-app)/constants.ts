@@ -1,7 +1,8 @@
 import { BranchReport } from "@/types";
 import dayjs from "dayjs";
 
-export const GLOBAL_SETTINGS_ID = "68d565e0f600f233bac9752f";
+export const GLOBAL_SETTINGS_ID = "68d9bb1e25ab8120d56022cb";
+
 export const labels = [
   {
     createdAt: "2025-09-25T21:44:21.283Z",

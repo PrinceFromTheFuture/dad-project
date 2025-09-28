@@ -4,7 +4,7 @@ import generatePDFreport from "@/lib/generatePDFReport/generatePDFreport";
 
 export async function GET() {
   try {
-    const test = await generatePDFreport("name", "/api/media/file/b0acea5e-10f8-43b9-b125-b161e9bb25e1.json");
+    const test = await generatePDFreport("name", "/api/media/file/32db450e-fd53-470d-b6ec-46f48e1d4824.json");
     const headers = new Headers({
       "Content-Type": "application/pdf",
       "Content-Length": test.byteLength.toString(),

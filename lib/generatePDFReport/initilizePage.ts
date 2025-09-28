@@ -25,12 +25,12 @@ export async function initializePage({ page, pageTitle, font, document }: PdfCon
     height: 3,
     color: CONFIG.colors.primary,
   });
-  const logo = await fetch(CONFIG.logo.buffer).then((res) => res.arrayBuffer());
+  const logo = await fetch(CONFIG.static.logo.buffer).then((res) => res.arrayBuffer());
   page.drawImage(await document.embedPng(logo), {
-    x: CONFIG.dimensions.page.width / 2 - CONFIG.logo.width / 2,
-    y: CONFIG.dimensions.mainContentTopMargin / 2 - CONFIG.logo.hight / 2,
-    width: CONFIG.logo.width,
-    height: CONFIG.logo.hight,
+    x: CONFIG.dimensions.page.width / 2 - CONFIG.static.logo.width / 2,
+    y: CONFIG.dimensions.mainContentTopMargin / 2 - CONFIG.static.logo.hight / 2,
+    width: CONFIG.static.logo.width,
+    height: CONFIG.static.logo.hight,
   });
 
   page.drawCircle({

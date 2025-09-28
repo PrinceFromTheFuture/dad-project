@@ -9,11 +9,13 @@ import UpdateSetting from "./UpdateSetting";
 import { GLOBAL_SETTINGS_ID } from "@/app/(my-app)/constants";
 
 function GeneralSettings({ branches, settings, roles }: { roles: Role[]; branches: Branch[]; settings: SettingType[] }) {
+
   const [selectedBranch, setSelectedBranch] = useState(branches[0].id);
   const [isSameForAllBranches, setIsSameForAllBranches] = useState(false);
   const onChnage = (branchId: string) => {
     setSelectedBranch(branchId);
   };
+  
   const selectedBranchSetting = branches.find((b) => b.id === selectedBranch)!.settings as SettingType;
 
   return (

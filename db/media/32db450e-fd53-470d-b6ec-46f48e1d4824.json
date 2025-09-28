@@ -225,7 +225,12 @@
       { "category": "גלש ומבוטח", "repeated": 24931 }
     ]
   },
-  { "id": "Z2229741", "name": " שלום נתנאל", "responsibility": "חקירות חוץ\r", "operations": [{ "category": "אוכלוסין", "repeated": 23 }] },
+  {
+    "id": "Z2229741",
+    "name": " שלום נתנאל",
+    "responsibility": "חקירות חוץ\r",
+    "operations": [{ "category": "אוכלוסין", "repeated": 23 }]
+  },
   {
     "id": "B1312426",
     "name": "שלום אופק יוני",
@@ -967,7 +972,12 @@
       { "category": "אבטלה", "repeated": 82212 }
     ]
   },
-  { "id": "Z0365459", "name": "לב הניה", "responsibility": "תפקיד לא מוגדר\r", "operations": [{ "category": "ייעוץ לקשיש", "repeated": 4 }] },
+  {
+    "id": "Z0365459",
+    "name": "לב הניה",
+    "responsibility": "תפקיד לא מוגדר\r",
+    "operations": [{ "category": "ייעוץ לקשיש", "repeated": 4 }]
+  },
   {
     "id": "Z0463469",
     "name": "קרנביסר רחל-מאשה",
@@ -977,21 +987,46 @@
       { "category": "ייעוץ לקשיש", "repeated": 4 }
     ]
   },
-  { "id": "Z4138123", "name": "אלפנדרי יעקב", "responsibility": "תפקיד לא מוגדר\r", "operations": [{ "category": "ייעוץ לקשיש", "repeated": 2 }] },
-  { "id": "Z5059405", "name": "נוימן חיה-שרה", "responsibility": "תפקיד לא מוגדר\r", "operations": [{ "category": "ייעוץ לקשיש", "repeated": 3 }] },
+  {
+    "id": "Z4138123",
+    "name": "אלפנדרי יעקב",
+    "responsibility": "תפקיד לא מוגדר\r",
+    "operations": [{ "category": "ייעוץ לקשיש", "repeated": 2 }]
+  },
+  {
+    "id": "Z5059405",
+    "name": "נוימן חיה-שרה",
+    "responsibility": "תפקיד לא מוגדר\r",
+    "operations": [{ "category": "ייעוץ לקשיש", "repeated": 3 }]
+  },
   {
     "id": "Z5094840",
     "name": "פינקלשטיין מלכה-לאה",
     "responsibility": "תפקיד לא מוגדר\r",
     "operations": [{ "category": "ייעוץ לקשיש", "repeated": 2 }]
   },
-  { "id": "Z5119345", "name": "שרייבר יונה-יפה", "responsibility": "תפקיד לא מוגדר\r", "operations": [{ "category": "ייעוץ לקשיש", "repeated": 4 }] },
-  { "id": "Z5333053", "name": "גרינפלד חנה-לאה", "responsibility": "תפקיד לא מוגדר\r", "operations": [{ "category": "ייעוץ לקשיש", "repeated": 3 }] },
+  {
+    "id": "Z5119345",
+    "name": "שרייבר יונה-יפה",
+    "responsibility": "תפקיד לא מוגדר\r",
+    "operations": [{ "category": "ייעוץ לקשיש", "repeated": 4 }]
+  },
+  {
+    "id": "Z5333053",
+    "name": "גרינפלד חנה-לאה",
+    "responsibility": "תפקיד לא מוגדר\r",
+    "operations": [{ "category": "ייעוץ לקשיש", "repeated": 3 }]
+  },
   {
     "id": "C0394944",
     "name": "רויטבלט ולדימיר",
     "responsibility": "תפקיד לא מוגדר\r",
     "operations": [{ "category": "שירותים רפואיים", "repeated": 118 }]
   },
-  { "id": "C1284946", "name": "קריוצ-קוביץ מרינה", "responsibility": "תפקיד לא מוגדר\r", "operations": [{ "category": "סיעוד", "repeated": 3494 }] }
+  {
+    "id": "C1284946",
+    "name": "קריוצ-קוביץ מרינה",
+    "responsibility": "תפקיד לא מוגדר\r",
+    "operations": [{ "category": "סיעוד", "repeated": 3494 }]
+  }
 ]

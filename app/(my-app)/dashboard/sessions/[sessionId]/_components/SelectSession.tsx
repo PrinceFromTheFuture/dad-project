@@ -1,8 +1,7 @@
 "use client";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { formatSessionDate } from "@/lib/utils";
 import { Session } from "@/payload-types";
-import dayjs from "dayjs";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -22,7 +21,7 @@ function SelectSession({ sessions, defaultSessionId }: { sessions: Session[]; de
       <SelectContent>
         {sessions.map((session) => (
           <SelectItem value={session.id} key={session.id}>
-            {dayjs().set("month", session.month!-1).set("years", session.year!).format("MMMM-YYYY")}
+            {formatSessionDate(session.year!, session.month!)}
           </SelectItem>
         ))}
       </SelectContent>

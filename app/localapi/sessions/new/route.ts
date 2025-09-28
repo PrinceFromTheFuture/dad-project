@@ -29,9 +29,9 @@ export async function POST(req: NextRequest) {
     }
     // Validate non-file fields with Zod
     const parsedBody = RequestBodySchema.safeParse({
-      year: Number(formYear),
+      year: Number(formYear)+1,
       nickname: formNickname,
-      month: Number(formMonth),
+      month: Number(formMonth)+1,
     });
 
     if (!parsedBody.success) {
@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
       });
 
       // Create a report linking all uploaded media and session
-      const report = await payload.create({
+       await payload.create({
         collection: "reports",
         data: {
           agents: agentsUpload.id,

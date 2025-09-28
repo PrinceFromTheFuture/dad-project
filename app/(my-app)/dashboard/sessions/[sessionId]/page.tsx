@@ -76,7 +76,6 @@ async function page({ params }: { params: Promise<{ sessionId: string }> }) {
       }
     }
   }
-const f = reports.docs
 
   return (
     <div className="flex-1 px-12 mt-6  flex flex-col  ">

@@ -21,7 +21,7 @@ export const CONFIG = {
     page: { width: 2100, height: 2970 },
     featureMargin: 43,
     mainContentSideMargin: 120,
-    mainContentTopMargin: 200,
+    mainContentTopMargin: 170,
     borderHeight: 3,
     innerWidth: 1860,
     innerBoxMargin: 20,
@@ -29,15 +29,22 @@ export const CONFIG = {
     contentBoxWidth: 1100,
   },
   agentDimensions: {
-    baseHight: 150,
-    operation: 52,
+    baseHight: 50 + 68 + 32,
+    operation: 50,
   },
   font: {
-    sizes: { regular: 36, large: 48 },
+    sizes: { regular: 20, large: 26 },
   },
-  logo: {
-    buffer: `${process.env.NEXT_PUBLIC_URL}/logo.png`,
-    width: 262,
-    hight: 103,
+  static: {
+    user: {
+      buffer: `${process.env.NEXT_PUBLIC_URL}/user.png`,
+      width: 68,
+      hight: 68,
+    },
+    logo: {
+      buffer: `${process.env.NEXT_PUBLIC_URL}/logo.png`,
+      width: 178,
+      hight: 70,
+    },
   },
 } as const;

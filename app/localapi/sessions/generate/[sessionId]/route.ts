@@ -1,9 +1,134 @@
 import generatePDFreport from "@/lib/generatePDFReport/generatePDFreport";
 import getPayload from "@/lib/getPayload";
-import { Branch, Media, Setting } from "@/payload-types";
+import { Media, Session } from "@/payload-types";
 import { Agent } from "@/types";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
+import zip from "jszip";
+import { headers } from "next/headers";
+import dayjs from "dayjs";
+import { formatSessionDate } from "@/lib/utils";
+
+interface Role {
+  id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+
+interface Branch {
+  id: string;
+  name: string;
+  searchKey: string;
+  settings: Setting;
+  updatedAt: string;
+  createdAt: string;
+}
+
+interface Setting {
+  id: string;
+  mode: "unified" | "splited";
+  categoriesGroups: {
+    data: Role[];
+    groupName: string;
+    id: string;
+  }[];
+  sorting: "name" | "operations";
+  updatedAt: string;
+  createdAt: string;
+}
+
+interface Report {
+  id: string;
+  name: null;
+  branch: Branch;
+  rawReport: Media;
+  agents: Media;
+  session: Session;
+  updatedAt: string;
+  createdAt: string;
+}
+
+const sortAgents = (agents: Agent[], sorting: Setting["sorting"]) => {
+  return (
+    sorting === "name"
+      ? agents.sort((a, b) => a.name.localeCompare(b.name))
+      : agents.sort(
+          (a, b) =>
+            a.operations.reduce((a, b) => a + b.repeated, 0) -
+            b.operations.reduce((a, b) => a + b.repeated, 0)
+        )
+  ).map((agent) => {
+    return { ...agent, operations: agent.operations.sort((a, b) => a.repeated - b.repeated) };
+  });
+};
+
+const getSessionData = async (sessionId: string) => {
+  const payload = await getPayload();
+  const session = await payload.findByID({ collection: "sessions", id: sessionId, depth: 10 });
+  const { docs: sessionReports } = (await payload.find({
+    collection: "reports",
+    depth: 10,
+    where: {
+      session: {
+        equals: sessionId,
+      },
+    },
+    pagination: false,
+  })) as { docs: Report[] };
+
+  return { session, sessionReports };
+};
+
+const getAgentsFromUrl = async (url: string) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}${url}`);
+  const data: Agent[] = await res.json();
+  return data;
+};
+
+const getPDFFromReport = async (report: Report) => {
+  const agents = await getAgentsFromUrl(report.agents.url!);
+  const sortedAgents = sortAgents(agents, report.branch.settings.sorting);
+  return (await generatePDFreport(sortedAgents)) as BodyInit;
+};
+
+const getPDFFromReportSplited = async (report: Report, sessionYearDate: { month: number; year: number }) => {
+  const reportsBytes: { bytes: BodyInit; fileName: string }[] = [];
+  const agents = await getAgentsFromUrl(report.agents.url!);
+
+  const agentsGroupedByRole: { [key: string]: Agent[] } = {};
+
+  const branchCategoriesGroupsSettings = report.branch.settings.categoriesGroups;
+  const branchCategoriesGroupsNames = branchCategoriesGroupsSettings.map((group) => group.groupName);
+
+  agents.forEach((agent) => {
+    const agentGroup = branchCategoriesGroupsSettings.find((group) =>
+      group.data.map((role) => role.name).includes(agent.responsibility)
+    );
+
+    if (!agentGroup) return;
+    if (typeof agentsGroupedByRole[agentGroup.groupName] === "undefined") {
+      agentsGroupedByRole[agentGroup.groupName] = [];
+    }
+    agentsGroupedByRole[agentGroup.groupName].push(agent) || [];
+  });
+
+  for (const groupName of branchCategoriesGroupsNames) {
+    if (!agentsGroupedByRole[groupName]) continue;
+    const sortedAgents = sortAgents(agentsGroupedByRole[groupName], report.branch.settings.sorting);
+    const reportBytes = (await generatePDFreport(sortedAgents)) as BodyInit;
+
+    const filename = `${groupName}-${report.branch.name}-${formatSessionDate(sessionYearDate.year, sessionYearDate.month)}.pdf`;
+
+    reportsBytes.push({
+      bytes: reportBytes,
+      fileName: `${filename}.pdf`,
+    });
+  }
+  return reportsBytes;
+};
+
+const getRportSettings = async (report: Report) => {};
 
 const reportSchema = z.object({
   mergeAllBranches: z.boolean(),
@@ -19,21 +144,11 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ ses
   }
   const callOptions = body.data;
 
-  const payload = await getPayload();
-  const session = await payload.findByID({ collection: "sessions", id: sessionId, depth: 10 });
+  const { session, sessionReports } = await getSessionData(sessionId);
 
   if (!session) {
     return NextResponse.json({ success: false, message: "session id is wrong" }, { status: 400 });
   }
-  const { docs: reports } = await payload.find({
-    collection: "reports",
-    depth: 10,
-    where: {
-      session: {
-        equals: sessionId,
-      },
-    },
-  });
 
   if (callOptions.mergeAllBranches === false) {
     if (!callOptions.branch) {
@@ -45,23 +160,71 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ ses
         { status: 400 }
       );
     }
-    const report = reports.find((report) => (report.branch as Branch).id === callOptions.branch)!;
-    const branch = report.branch! as Branch;
-    const branchSettings = branch.settings as Setting;
-    const reportData = report.agents as Media;
-    if (branchSettings.mode === "unified") {
-      const reportBytes = await generatePDFreport(branchSettings.sorting, reportData.url!);
-      const headers = new Headers({
-        "Content-Type": "application/pdf",
-        "Content-Disposition": "attachment; filename=example.pdf",
-        "Content-Length": reportBytes.byteLength.toString(),
-      });
+
+    const report = sessionReports.find((report) => (report.branch as Branch).id === callOptions.branch)!;
+    if (report.branch.settings.mode === "unified") {
+      const reportBytes = await getPDFFromReport(report);
 
       return new NextResponse(reportBytes, {
-        status: 200,
+        status: 202,
+        headers: {
+          "Content-Type": "application/pdf",
+          "Content-Disposition": "attachment; filename=example.pdf",
+        },
+      });
+    } else if (report.branch.settings.mode === "splited") {
+      const zippedReports = new zip();
+
+      const reportsBytes = await getPDFFromReportSplited(report, {
+        month: Number(session.month),
+        year: Number(session.year),
+      });
+
+      reportsBytes.forEach((report) => {
+        zippedReports.file(report.fileName, report.bytes);
+      });
+      const zipFile = await zippedReports.generateAsync({ type: "arraybuffer" });
+
+      const headers = new Headers({
+        "Content-Type": "application/zip",
+        "Content-Disposition": "attachment; filename=exampleddfs.zip",
+      });
+      return new NextResponse(zipFile, {
+        status: 202,
         headers,
       });
     }
+  } else if (callOptions.mergeAllBranches === true) {
+    const zippedReports = new zip();
+
+    for (const report of sessionReports) {
+      if (report.branch.settings.mode === "unified") {
+        const reportBytes = await getPDFFromReport(report);
+        zippedReports.file(
+          `${report.branch.name}-${formatSessionDate(session.year!, session.month!)}.pdf`,
+          reportBytes
+        );
+      } else if (report.branch.settings.mode === "splited") {
+        const folder = zippedReports.folder(report.branch.name)!;
+        const reportsBytes = await getPDFFromReportSplited(report, {
+          month: Number(session.month),
+          year: Number(session.year),
+        });
+
+        reportsBytes.forEach((report) => {
+          folder.file(report.fileName, report.bytes);
+        });
+      }
+    }
+    const zipFile = await zippedReports.generateAsync({ type: "arraybuffer" });
+
+    const headers = new Headers({
+      "Content-Type": "application/zip",
+      "Content-Disposition": "attachment; filename=exampleddfs.zip",
+    });
+    return new NextResponse(zipFile, {
+      status: 202,
+      headers,
+    });
   }
-  return NextResponse.json({ success: true });
 }
