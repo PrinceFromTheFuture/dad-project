@@ -20,14 +20,10 @@ const getPage = (doc: PDFDocument) => doc.getPage(doc.getPageCount() - 1);
 export async function drawAgent({ font, document, cursor, agent }: PdfConfig) {
   // Calculate box height based on number of operations
   const numberOfOperations = agent.operations.length;
-  const boxHeight = 400;
-  //
-  //CONFIG.agentDimensions.baseHight +
-  //numberOfOperations * CONFIG.agentDimensions.operation +
-  //CONFIG.dimensions.agentBoxMargin;
+  const boxHeight = CONFIG.agentDimensions.baseHight + numberOfOperations * CONFIG.agentDimensions.operation + CONFIG.dimensions.agentBoxMargin;
 
   // Check if we need a new page
-  if (cursor.y - 400 < CONFIG.dimensions.mainContentTopMargin) {
+  if (cursor.y - boxHeight < CONFIG.dimensions.mainContentTopMargin) {
     document.addPage([CONFIG.dimensions.page.width, CONFIG.dimensions.page.height]);
     await initializePage({
       page: getPage(document),
@@ -35,21 +31,23 @@ export async function drawAgent({ font, document, cursor, agent }: PdfConfig) {
       font,
       document,
     });
-    cursor.y = CONFIG.dimensions.page.height;
+    cursor.y = CONFIG.dimensions.page.height - CONFIG.dimensions.mainContentTopMargin;
   }
+
+  cursor.y -= CONFIG.dimensions.agentBoxMargin;
+
+  console.log(cursor.y);
+
   const page = getPage(document);
 
-  // Move cursor down for the next agent (subtract from y since we're working from top)
-  console.log(cursor.y);
-  const data = {
+  page.drawRectangle({
     x: cursor.x,
-    y: cursor.y - CONFIG.dimensions.mainContentTopMargin - 400,
+    y: cursor.y - boxHeight,
     color: CONFIG.colors.primary,
     opacity: numberOfOperations / 10 + 0.1 > 1 ? 1 : numberOfOperations / 10 + 0.1,
     width: 700,
-    height: 400,
-  };
-  page.drawRectangle(data);
-  cursor.y -= 400;
-  console.log(cursor.y);
+    height: boxHeight,
+  });
+
+  cursor.y -= boxHeight;
 }
