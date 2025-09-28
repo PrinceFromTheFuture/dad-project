@@ -20,7 +20,7 @@ async function generatePDFreport(agents: Agent[]): Promise<Uint8Array> {
   const { medium, semiBold } = await registerFonts(document);
 
   const page = document.addPage([2100, 2970]);
-await initializePage({ page, pageTitle: "דוח בדיקות", font: semiBold, document });
+  await initializePage({ page, pageTitle: "דוח בדיקות", font: semiBold, document });
 
   for (const agent of agents) {
     await drawAgent({ page, font: { medium, semiBold }, document, cursor, agent });
