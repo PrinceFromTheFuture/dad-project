@@ -50,6 +50,8 @@ export async function initializePage({ page, pageTitle, font, document }: PdfCon
     size: 38,
     font,
   });
+
+ 
   page.drawText("1", {
     color: rgb(0, 0, 0),
     x:

@@ -1,8 +1,7 @@
 import { Agent, Operation } from "@/types";
 import fs from "fs";
 
-
-function decodeRawReport(rawReport:string) {
+function decodeRawReport(rawReport: string) {
   // Constants
   const TABLE_START_BOUNDARY =
     "---------  --------------- ------------ -------------------- --------   -------------------------";
@@ -15,7 +14,6 @@ function decodeRawReport(rawReport:string) {
   const VIRTUAL_LABEL = "וירטואלי";
   const MAIN_OFFICE_LABEL = "משרד ראשי";
   const DATA_AGENTS = "agents.ts";
-
 
   var allAgents: Agent[] = [];
   const knownIssues = [TABLE_START_BOUNDARY, TABLE_END_BOUNDARY];
@@ -88,7 +86,7 @@ function decodeRawReport(rawReport:string) {
       id: agentId,
       name: agentName,
       responsibility: agentMainResponsibility,
-      operations:parsedOperations
+      operations: parsedOperations,
     };
 
     allAgents.push(agentRecord);
@@ -99,7 +97,7 @@ function decodeRawReport(rawReport:string) {
   function getOperationsFromAgentRows(rows: string[]) {
     const parsed = rows.slice(1).map((operationStr) => {
       const operation = operationStr.split("  ").filter((str) => str.trim().length > 0);
-      const operationObj: Operation  = {
+      const operationObj: Operation = {
         category: operation[1],
         repeated: Number(operation[0]),
       };

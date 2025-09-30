@@ -6,15 +6,16 @@ import Sessions from "./db/collections/Sessions";
 import Reports from "./db/collections/Reports";
 import Settings from "./db/collections/Settings";
 import Roles from "./db/collections/roles";
+import Conf from "./db/collections/Conf";
 
 export default buildConfig({
   // Your Payload secret - should be a complex and secure string, unguessable
   secret: process.env.PAYLOAD_SECRET || "",
-  collections: [Media, Branches, Sessions, Reports, Settings,Roles],
+  collections: [Media, Branches, Sessions, Reports, Settings, Roles, Conf],
   // Whichever Database Adapter you're using should go here
   // Mongoose is shown as an example, but you can also use Postgres
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI || "",
+    url: "mongodb://mongo:27017",
   }),
   // If you want to resize images, crop, set focal point, etc.
   // make sure to install it and pass it to the config.

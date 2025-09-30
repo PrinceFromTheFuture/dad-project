@@ -9,12 +9,14 @@ const Branches: CollectionConfig = {
     delete: () => true,
   },
   fields: [
-    { name: "name", type: "text" },
-    { name: "searchKey", type: "text" },
+    { name: "name", type: "text", required: true },
+    { name: "searchKey", type: "text", required: true },
+    { name: "nameInHebrew", type: "text", required: true },
     {
       name: "settings",
       type: "relationship",
       relationTo: "settings",
+      required: true,
     },
   ],
 };

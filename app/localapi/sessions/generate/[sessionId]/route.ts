@@ -20,6 +20,7 @@ interface Branch {
   id: string;
   name: string;
   searchKey: string;
+  nameInHebrew: string;
   settings: Setting;
   updatedAt: string;
   createdAt: string;
@@ -86,13 +87,16 @@ const getAgentsFromUrl = async (url: string) => {
   return data;
 };
 
-const getPDFFromReport = async (report: Report) => {
+const getPDFFromReport = async (report: Report, documentTitle: string) => {
   const agents = await getAgentsFromUrl(report.agents.url!);
   const sortedAgents = sortAgents(agents, report.branch.settings.sorting);
-  return (await generatePDFreport(sortedAgents)) as BodyInit;
+  return (await generatePDFreport(sortedAgents, documentTitle)) as BodyInit;
 };
 
-const getPDFFromReportSplited = async (report: Report, sessionYearDate: { month: number; year: number }) => {
+const getPDFFromReportSplited = async (
+  report: Report,
+  sessionYearDate: { month: number; year: number },
+) => {
   const reportsBytes: { bytes: BodyInit; fileName: string }[] = [];
   const agents = await getAgentsFromUrl(report.agents.url!);
 
@@ -110,15 +114,17 @@ const getPDFFromReportSplited = async (report: Report, sessionYearDate: { month:
     if (typeof agentsGroupedByRole[agentGroup.groupName] === "undefined") {
       agentsGroupedByRole[agentGroup.groupName] = [];
     }
-    agentsGroupedByRole[agentGroup.groupName].push(agent) || [];
+    agentsGroupedByRole[agentGroup.groupName]?.push(agent) || [];
   });
 
   for (const groupName of branchCategoriesGroupsNames) {
     if (!agentsGroupedByRole[groupName]) continue;
     const sortedAgents = sortAgents(agentsGroupedByRole[groupName], report.branch.settings.sorting);
-    const reportBytes = (await generatePDFreport(sortedAgents)) as BodyInit;
+    
+    
+    const filename = `${groupName} - ${report.branch.name} - ${formatSessionDate(sessionYearDate.year, sessionYearDate.month)}`;
 
-    const filename = `${groupName}-${report.branch.name}-${formatSessionDate(sessionYearDate.year, sessionYearDate.month)}.pdf`;
+    const reportBytes = (await generatePDFreport(sortedAgents, filename)) as BodyInit;
 
     reportsBytes.push({
       bytes: reportBytes,
@@ -163,22 +169,30 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ ses
 
     const report = sessionReports.find((report) => (report.branch as Branch).id === callOptions.branch)!;
     if (report.branch.settings.mode === "unified") {
-      const reportBytes = await getPDFFromReport(report);
+      const reportTitle = `${report.branch.name} - ${formatSessionDate(session.year!, session.month!)}`;
+
+      const reportBytes = await getPDFFromReport(report, reportTitle);
 
       return new NextResponse(reportBytes, {
         status: 202,
         headers: {
           "Content-Type": "application/pdf",
-          "Content-Disposition": "attachment; filename=example.pdf",
+          "Content-Disposition": "attachment",
+          "file-name": `${report.branch.name} - ${formatSessionDate(session.year!, session.month!)}.pdf`,
         },
       });
     } else if (report.branch.settings.mode === "splited") {
       const zippedReports = new zip();
 
-      const reportsBytes = await getPDFFromReportSplited(report, {
-        month: Number(session.month),
-        year: Number(session.year),
-      });
+
+      const reportsBytes = await getPDFFromReportSplited(
+        report,
+        {
+          month: Number(session.month),
+          year: Number(session.year),
+        },
+        "report.file"
+      );
 
       reportsBytes.forEach((report) => {
         zippedReports.file(report.fileName, report.bytes);
@@ -187,8 +201,10 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ ses
 
       const headers = new Headers({
         "Content-Type": "application/zip",
-        "Content-Disposition": "attachment; filename=exampleddfs.zip",
+        "Content-Disposition": "attachment",
+        "file-name": `${report.branch.name} - ${formatSessionDate(session.year!, session.month!)}.zip`,
       });
+
       return new NextResponse(zipFile, {
         status: 202,
         headers,
@@ -201,7 +217,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ ses
       if (report.branch.settings.mode === "unified") {
         const reportBytes = await getPDFFromReport(report);
         zippedReports.file(
-          `${report.branch.name}-${formatSessionDate(session.year!, session.month!)}.pdf`,
+          `${report.branch.name} - ${formatSessionDate(session.year!, session.month!)}.pdf`,
           reportBytes
         );
       } else if (report.branch.settings.mode === "splited") {
@@ -220,7 +236,8 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ ses
 
     const headers = new Headers({
       "Content-Type": "application/zip",
-      "Content-Disposition": "attachment; filename=exampleddfs.zip",
+      "Content-Disposition": "attachment",
+      "file-name": `Session Reports - ${formatSessionDate(session.year!, session.month!)}.zip`,
     });
     return new NextResponse(zipFile, {
       status: 202,

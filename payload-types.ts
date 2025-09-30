@@ -73,6 +73,7 @@ export interface Config {
     reports: Report;
     settings: Setting;
     roles: Role;
+    conf: Conf;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     reports: ReportsSelect<false> | ReportsSelect<true>;
     settings: SettingsSelect<false> | SettingsSelect<true>;
     roles: RolesSelect<false> | RolesSelect<true>;
+    conf: ConfSelect<false> | ConfSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -148,9 +150,10 @@ export interface Media {
  */
 export interface Branch {
   id: string;
-  name?: string | null;
-  searchKey?: string | null;
-  settings?: (string | null) | Setting;
+  name: string;
+  searchKey: string;
+  nameInHebrew: string;
+  settings: string | Setting;
   updatedAt: string;
   createdAt: string;
 }
@@ -210,6 +213,16 @@ export interface Report {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conf".
+ */
+export interface Conf {
+  id: string;
+  name?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -262,6 +275,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'roles';
         value: string | Role;
+      } | null)
+    | ({
+        relationTo: 'conf';
+        value: string | Conf;
       } | null)
     | ({
         relationTo: 'users';
@@ -334,6 +351,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface BranchesSelect<T extends boolean = true> {
   name?: T;
   searchKey?: T;
+  nameInHebrew?: T;
   settings?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -384,6 +402,15 @@ export interface SettingsSelect<T extends boolean = true> {
  * via the `definition` "roles_select".
  */
 export interface RolesSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conf_select".
+ */
+export interface ConfSelect<T extends boolean = true> {
   name?: T;
   updatedAt?: T;
   createdAt?: T;

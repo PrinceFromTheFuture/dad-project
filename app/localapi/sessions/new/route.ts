@@ -13,7 +13,7 @@ const RequestBodySchema = z.object({
   year: z.number(),
 });
 
-export async function POST(req: NextRequest) {  
+export async function POST(req: NextRequest) {
   try {
     // Parse the multipart/form-data request
     const formData = await req.formData();
@@ -29,9 +29,9 @@ export async function POST(req: NextRequest) {
     }
     // Validate non-file fields with Zod
     const parsedBody = RequestBodySchema.safeParse({
-      year: Number(formYear)+1,
+      year: Number(formYear),
       nickname: formNickname,
-      month: Number(formMonth)+1,
+      month: Number(formMonth),
     });
 
     if (!parsedBody.success) {
@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
       collection: "sessions",
       data: {
         nickname,
-        month,
+        month: month - 1 ,// Adjust month to be zero-based,
         year,
       },
     });
@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
       });
 
       // Create a report linking all uploaded media and session
-       await payload.create({
+      await payload.create({
         collection: "reports",
         data: {
           agents: agentsUpload.id,

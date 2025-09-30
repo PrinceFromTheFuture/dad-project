@@ -7,10 +7,7 @@ export interface BranchReport {
   totalOperations: number; // Total number of operations across all agents
 }
 
-export interface Operation {
-  category: string;
-  repeated: number;
-}
+
 export interface AgentView {
   nationalId: string;
   name: string;
@@ -23,6 +20,10 @@ export interface Agent {
   responsibility: string;
   id: string;
   operations: Operation[];
+}
+export interface Operation {
+  category: string;
+  repeated: number;
 }
 export interface OperationView {
   category: string;

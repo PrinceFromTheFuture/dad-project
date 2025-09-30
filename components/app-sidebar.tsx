@@ -8,6 +8,7 @@ import {
   Command,
   Frame,
   GalleryVerticalEnd,
+  LayoutDashboard,
   Map,
   PieChart,
   Settings,
@@ -25,40 +26,30 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } fr
 // This is sample data.
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
+    name: "Yehuda",
+    email: "waisblay@walla.com",
     avatar: "/avatars/shadcn.jpg",
   },
   teams: [
     {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
+      name: "Report Flow",
+      logo: LayoutDashboard,
+      plan: "BTL - Report Generaor",
     },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
+    
   ],
 
   projects: [
     {
       name: "Sessions",
-      url: "/dashboard/sessions",
+      url: "/sessions",
       icon: Workflow,
     },
     {
       name: "Settings",
-      url: "/dashboard/settings",
+      url: "/settings",
       icon: Settings,
     },
-    
   ],
 };
 

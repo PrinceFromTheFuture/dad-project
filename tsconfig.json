@@ -13,6 +13,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "rootDir": ".",
+    "outDir": "./dist",
     "baseUrl": ".",
     "plugins": [
       {
@@ -21,11 +23,18 @@
     ],
     "paths": {
       "@/*": ["./*"],
-    "@payload-config": ["./payload.config.ts"]
-
+      "@payload-config": ["./payload.config.ts"]
     }
   },
 
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.mjs"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "next.config.mjs",
+    "loadInitialData.ts",
+    "app/(my-app)/constants.ts"
+  ],
   "exclude": ["node_modules"]
 }
