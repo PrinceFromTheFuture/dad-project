@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "bun loadInitialData.ts && next start",
+    "start": "next start",
     "generate": "payload generate:types",
     "load": "bun loadInitialData.ts",
     "lint": "eslint"

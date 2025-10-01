@@ -12,6 +12,7 @@ const loadInitialData = async () => {
     data: {
       mode: "unified",
       sorting: "name",
+      id: GLOBAL_SETTINGS_ID,
       categoriesGroups: [],
     },
   });

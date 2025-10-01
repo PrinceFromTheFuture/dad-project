@@ -1,5 +1,5 @@
 # Use Node.js 18 on Alpine (small image)
-FROM oven/bun:latest
+FROM oven/bun:alpine
 
 # Set working directory
 WORKDIR /app

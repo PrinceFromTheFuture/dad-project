@@ -12,10 +12,11 @@ services:
       - PAYLOAD_SECRET="fjkdshi7h3iu"
     volumes:
       - app-data:/app/db/media 
+    post_start:
+      - command: bun run load
     depends_on:
       - mongo
   
-
   mongo:
     image: mongo
     container_name: mongo_db
