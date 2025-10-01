@@ -153,6 +153,7 @@ export interface Branch {
   name: string;
   searchKey: string;
   nameInHebrew: string;
+  useRemoteSettings?: boolean | null;
   settings: string | Setting;
   updatedAt: string;
   createdAt: string;
@@ -217,7 +218,8 @@ export interface Report {
  */
 export interface Conf {
   id: string;
-  name?: string | null;
+  isDbStarted: boolean;
+  isRemoteSettingsEnabled: boolean;
   updatedAt: string;
   createdAt: string;
 }
@@ -352,6 +354,7 @@ export interface BranchesSelect<T extends boolean = true> {
   name?: T;
   searchKey?: T;
   nameInHebrew?: T;
+  useRemoteSettings?: T;
   settings?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -411,7 +414,8 @@ export interface RolesSelect<T extends boolean = true> {
  * via the `definition` "conf_select".
  */
 export interface ConfSelect<T extends boolean = true> {
-  name?: T;
+  isDbStarted?: T;
+  isRemoteSettingsEnabled?: T;
   updatedAt?: T;
   createdAt?: T;
 }

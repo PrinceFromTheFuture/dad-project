@@ -15,7 +15,10 @@ const Conf: CollectionConfig = {
     delete: () => true,
   },
   slug: "conf",
-  fields: [{ name: "name", type: "text" }],
+  fields: [
+    { name: "isDbStarted", type: "checkbox", required: true },
+    { name: "isRemoteSettingsEnabled", type: "checkbox", required: true },
+  ],
 };
 
 export default Conf;

@@ -330,7 +330,11 @@ export function CategoriesGroups({ setting, onUpdate, roles }: CategoriesGroupsP
                   onRename={handleRenameGroup}
                 >
                   {droppedItems[id]?.map((itemId) => (
-                    <Draggable key={itemId} id={itemId} onClick={() => handleItemClick(itemId, id)}>
+                    <Draggable 
+                      key={itemId} 
+                      id={itemId} 
+                      onClick={() => handleItemClick(itemId, id)}
+                    >
                       {roles.find((r) => r.id === itemId)?.name || "Unknown Role"}
                     </Draggable>
                   ))}

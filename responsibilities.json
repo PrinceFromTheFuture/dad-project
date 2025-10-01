@@ -1,11 +1,4 @@
-export const GLOBAL_SETTINGS_ID = "68d9bb1e25ab8120d56022cb";
-
-export const branches = [
-  { name: "Bnei Brak", searchKey: "BNEIBRAK", nameInHebrew: "בני ברק" },
-  { name: "Misrad Rashi", searchKey: "MisradRashi", nameInHebrew: "משרד ראשי" },
-];
-
-export const roles = [
+[
   "תפקיד לא מוגדר\r",
   "ביטחון\r",
   "ביקורת גימלאות\r",
@@ -55,7 +48,7 @@ export const roles = [
   " מכרזים ופיתוח\r",
   " משאבי אנוש - כח אדם\r",
   " משמעת\r",
-  'משרד ראשי"',
+  "משרד ראשי\"",
   " משרד ראשי\r",
   "נוכחות\r",
   "סניפים\r",
@@ -226,5 +219,5 @@ export const roles = [
   "גמלאות מחליפות שכר\r",
   " קשרי חוץ לאמנות בינלאומיו\r",
   " שארים\r",
-  "שרות מילואים\r",
-];
+  "שרות מילואים\r"
+]
