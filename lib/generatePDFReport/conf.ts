@@ -43,8 +43,8 @@ export const CONFIG = {
     },
     logo: {
       buffer: `${process.env.NEXT_PUBLIC_URL}/logo.png`,
-      width: 178,
-      hight: 70,
+      width: 200,
+      hight: 85,
     },
   },
 } as const;

@@ -1,7 +1,7 @@
 import { Agent, Operation } from "@/types";
 import fs from "fs";
 
-function decodeRawReport(rawReport: string ) {
+function decodeRawReport(data: string) {
   // Constants
   const TABLE_START_BOUNDARY = "---------  --------------- ------------ -------------------- --------   -------------------------";
   const TABLE_END_BOUNDARY = "=========";
@@ -12,6 +12,19 @@ function decodeRawReport(rawReport: string ) {
   const SECOND_LOCATION_SPLIT_PREFIX = '-סה"כ ל';
   const VIRTUAL_LABEL = "וירטואלי";
   const BRANCH_NAME = "משרד ראשי";
+
+  const nationalIdDecoder = [
+    { key: "Z", value: "0" },
+    { key: "B", value: "2" },
+    { key: "C", value: "3" },
+    { key: "I", value: "9" },
+  ];
+  let rawReport: string = data;
+
+  nationalIdDecoder.forEach((decoder) => {
+    rawReport = rawReport.replaceAll(decoder.key, decoder.value);
+  });
+
 
   var allAgents: Agent[] = [];
   const knownIssues = [TABLE_START_BOUNDARY, TABLE_END_BOUNDARY];
@@ -74,12 +87,12 @@ function decodeRawReport(rawReport: string ) {
 
     const parsedOperations = getOperationsFromAgentRows(agentRows, agentId);
     parsedOperations.push({ category: headerOperationCat, repeated: headerOperationCount });
-    
+
     const map = new Map();
-      
+
     for (const item of parsedOperations) {
       if (map.has(item.category)) {
-          // Merge objects by `cat`, summing their `count` values
+        // Merge objects by `cat`, summing their `count` values
 
         map.get(item.category).repeated += item.repeated;
       } else {
@@ -88,7 +101,6 @@ function decodeRawReport(rawReport: string ) {
     }
 
     const data: Operation[] = Array.from(map.values());
-     
 
     const agentRecord: Agent = {
       id: agentId,
@@ -139,7 +151,6 @@ function decodeRawReport(rawReport: string ) {
     }
 
     return defenet;
-    
   }
   return { allAgents };
 }

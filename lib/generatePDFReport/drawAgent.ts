@@ -14,15 +14,16 @@ interface PdfConfig {
   document: PDFDocument;
   agent: Agent;
   cursor: { x: number; y: number };
+  pageTitle: string;
 }
 const getPage = (doc: PDFDocument) => doc.getPage(doc.getPageCount() - 1);
 
-export async function drawAgent({ font, document, cursor, agent }: PdfConfig) {
+export async function drawAgent({ font, document, cursor, agent, pageTitle }: PdfConfig) {
   // Calculate box height based on number of operations
   const numberOfOperations = agent.operations.length;
   const boxHeight = CONFIG.agentDimensions.baseHight + numberOfOperations * CONFIG.agentDimensions.operation;
 
-  await adjustLayout(cursor, boxHeight, document, font.semiBold);
+  await adjustLayout(cursor, boxHeight, document, font.semiBold, pageTitle);
 
   const page = getPage(document);
 
@@ -101,12 +102,7 @@ async function drawOperations(
   });
 }
 
-async function drawSum(
-  page: PDFPage,
-  font: { medium: PDFFont; semiBold: PDFFont },
-  cursor: { x: number; y: number },
-  sum: number
-) {
+async function drawSum(page: PDFPage, font: { medium: PDFFont; semiBold: PDFFont }, cursor: { x: number; y: number }, sum: number) {
   cursor.y -= 50;
 
   page.drawRectangle({
@@ -150,7 +146,6 @@ async function drawHeader(
   document: PDFDocument,
   agent: Agent
 ) {
-
   const user = await fetch(CONFIG.static.user.buffer).then((res) => res.arrayBuffer());
   page.drawImage(await document.embedPng(user), {
     x: cursor.x - CONFIG.static.user.width - 42,
@@ -160,11 +155,7 @@ async function drawHeader(
   });
 
   page.drawText(agent.name, {
-    x:
-      cursor.x -
-      CONFIG.static.user.width -
-      54 -
-      font.semiBold.widthOfTextAtSize(agent.name, CONFIG.font.sizes.large),
+    x: cursor.x - CONFIG.static.user.width - 54 - font.semiBold.widthOfTextAtSize(agent.name, CONFIG.font.sizes.large),
     y: cursor.y - font.semiBold.heightAtSize(CONFIG.font.sizes.large) + 5,
     font: font.semiBold,
     color: CONFIG.colors.primary,
@@ -172,21 +163,14 @@ async function drawHeader(
   });
 
   page.drawText(`#${agent.id}`, {
-    x:
-      cursor.x -
-      font.medium.widthOfTextAtSize(`#${agent.id}`, CONFIG.font.sizes.regular) -
-      CONFIG.static.user.width -
-      61,
+    x: cursor.x - font.medium.widthOfTextAtSize(`#${agent.id}`, CONFIG.font.sizes.regular) - CONFIG.static.user.width - 61,
     y: cursor.y - font.medium.heightAtSize(CONFIG.font.sizes.regular) - 32,
     font: font.medium,
     color: CONFIG.colors.textSecondary,
     size: CONFIG.font.sizes.regular,
   });
 
-  const responsibilityLabelWidth = font.semiBold.widthOfTextAtSize(
-    agent.responsibility,
-    CONFIG.font.sizes.regular
-  );
+  const responsibilityLabelWidth = font.semiBold.widthOfTextAtSize(agent.responsibility, CONFIG.font.sizes.regular);
   page.drawText(agent.responsibility, {
     x: CONFIG.dimensions.mainContentSideMargin + 40,
     y: cursor.y - CONFIG.dimensions.agentBoxMargin + 6,
@@ -204,24 +188,16 @@ async function drawHeader(
   });
 }
 
-async function adjustLayout(
-  cursor: { x: number; y: number },
-  boxHeight: number,
-  document: PDFDocument,
-  font: PDFFont
-) {
+async function adjustLayout(cursor: { x: number; y: number }, boxHeight: number, document: PDFDocument, font: PDFFont, pageTitle: string) {
   // Check if we need a new page
   if (cursor.y - boxHeight - CONFIG.dimensions.agentBoxMargin + 20 < CONFIG.dimensions.mainContentTopMargin) {
     document.addPage([CONFIG.dimensions.page.width, CONFIG.dimensions.page.height]);
     await initializePage({
       page: getPage(document),
-      pageTitle: "דוח בדיקות",
+      pageTitle: pageTitle,
       font,
       document,
     });
-    cursor.y =
-      CONFIG.dimensions.page.height -
-      CONFIG.dimensions.mainContentTopMargin -
-      CONFIG.dimensions.agentBoxMargin;
+    cursor.y = CONFIG.dimensions.page.height - CONFIG.dimensions.mainContentTopMargin - CONFIG.dimensions.agentBoxMargin;
   }
 }

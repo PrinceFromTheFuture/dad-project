@@ -12,6 +12,7 @@ const Branches: CollectionConfig = {
     { name: "name", type: "text", required: true },
     { name: "searchKey", type: "text", required: true },
     { name: "nameInHebrew", type: "text", required: true },
+    
     {
       name: "useRemoteSettings",
       type: "checkbox",
