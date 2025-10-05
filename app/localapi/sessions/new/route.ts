@@ -44,7 +44,6 @@ export async function POST(req: NextRequest) {
     const { month, nickname, year } = parsedBody.data;
     const payload = await getPayload();
     const { docs: branches } = await payload.find({ collection: "branches" });
-
     // Convert files to Buffers and pair with branchNames
     const rawReports = await Promise.all(
       files.map(async (file, index) => {

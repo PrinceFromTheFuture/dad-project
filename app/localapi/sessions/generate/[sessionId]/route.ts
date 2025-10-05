@@ -50,19 +50,7 @@ interface Report {
   createdAt: string;
 }
 
-const sortAgents = (agents: Agent[], sorting: Setting["sorting"]) => {
-  return (
-    sorting === "name"
-      ? agents.sort((a, b) => a.name.localeCompare(b.name))
-      : agents.sort(
-          (a, b) =>
-            a.operations.reduce((a, b) => a + b.repeated, 0) -
-            b.operations.reduce((a, b) => a + b.repeated, 0)
-        )
-  ).map((agent) => {
-    return { ...agent, operations: agent.operations.sort((a, b) => a.repeated - b.repeated) };
-  });
-};
+
 
 const getSessionData = async (sessionId: string) => {
   const payload = await getPayload();
@@ -89,7 +77,7 @@ const getAgentsFromUrl = async (url: string) => {
 
 const getPDFFromReport = async (report: Report, documentTitle: string) => {
   const agents = await getAgentsFromUrl(report.agents.url!);
-  const sortedAgents = sortAgents(agents, report.branch.settings.sorting);
+  const sortedAgents = agents
   return (await generatePDFreport(sortedAgents, documentTitle)) as BodyInit;
 };
 
@@ -119,7 +107,7 @@ const getPDFFromReportSplited = async (
 
   for (const groupName of branchCategoriesGroupsNames) {
     if (!agentsGroupedByRole[groupName]) continue;
-    const sortedAgents = sortAgents(agentsGroupedByRole[groupName], report.branch.settings.sorting);
+    const sortedAgents = agentsGroupedByRole[groupName]
     
     
     const filename = `${groupName} - ${report.branch.name} - ${formatSessionDate(sessionYearDate.year, sessionYearDate.month)}`;
@@ -194,8 +182,8 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ ses
         "report.file"
       );
 
-      reportsBytes.forEach((report) => {
-        zippedReports.file(report.fileName, report.bytes);
+      reportsBytes.forEach((report ) => {
+        zippedReports.file(report.fileName, report.bytes as Buffer);
       });
       const zipFile = await zippedReports.generateAsync({ type: "arraybuffer" });
 
@@ -218,7 +206,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ ses
         const reportBytes = await getPDFFromReport(report);
         zippedReports.file(
           `${report.branch.name} - ${formatSessionDate(session.year!, session.month!)}.pdf`,
-          reportBytes
+          reportBytes as Buffer
         );
       } else if (report.branch.settings.mode === "splited") {
         const folder = zippedReports.folder(report.branch.name)!;
@@ -228,7 +216,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ ses
         });
 
         reportsBytes.forEach((report) => {
-          folder.file(report.fileName, report.bytes);
+          folder.file(report.fileName, report.bytes as Buffer);
         });
       }
     }

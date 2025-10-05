@@ -1,10 +1,9 @@
 import getPayload from "@/lib/getPayload";
 import axios from "axios";
-import { branches, GLOBAL_SETTINGS_ID, roles } from "./app/(my-app)/constants";
 
 const REMOTE_SERVER_URL = process.env.NEXT_PUBLIC_REMOTES_SERVER_URL || "http://localhost:3001";
 
-console.log(process.env.DATABASE_URI)
+console.log(REMOTE_SERVER_URL)
 /**
  * Fetches all documents from a collection on the remote server
  */
@@ -23,7 +22,7 @@ async function fetchRemoteCollection(collectionName: string) {
 const loadInitialData = async () => {
   const payload = await getPayload();
   const config = await payload.find({ collection: "conf" });
-  if (config.docs.length > 0) {
+  if (config.docs.length > 10) {
     return;
   }
 
@@ -80,7 +79,7 @@ const loadInitialData = async () => {
       collection: "settings",
       data: {
         id: setting.id,
-        mode: setting.mode,
+        mode: 'unified',
         sorting: setting.sorting,
         categoriesGroups: categoriesGroups || [],
       },

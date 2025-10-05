@@ -12,6 +12,7 @@ function decodeRawReport(rawReport: string ) {
   const SECOND_LOCATION_SPLIT_PREFIX = '-סה"כ ל';
   const VIRTUAL_LABEL = "וירטואלי";
   const BRANCH_NAME = "משרד ראשי";
+  const DATA_AGENTS = "agents.ts";
 
   var allAgents: Agent[] = [];
   const knownIssues = [TABLE_START_BOUNDARY, TABLE_END_BOUNDARY];
@@ -141,6 +142,8 @@ function decodeRawReport(rawReport: string ) {
     return defenet;
     
   }
+
+  fs.writeFileSync(DATA_AGENTS, `export const agents = ${JSON.stringify(allAgents)};`);
   return { allAgents };
 }
 

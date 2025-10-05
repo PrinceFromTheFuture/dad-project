@@ -58,35 +58,7 @@ function UpdateSetting({ setting, roles, disabled = false }: { setting: Settings
       )}
       <Form {...form}>
         <form className="">
-          <FormField
-            control={form.control}
-            name="sorting"
-            render={({ field }) => (
-              <Setting
-                title="Sorting Agents In Report"
-                description="Choose how agents are sorted within a report"
-              >
-                <FormControl>
-                  <Select
-                    onValueChange={(value) => {
-                      field.onChange(value);
-                      const updatedData = { ...form.getValues(), sorting: value } as FormType;
-                      handleApiUpdate(updatedData);
-                    }}
-                    value={field.value}
-                  >
-                    <SelectTrigger className="min-w-[160px]">
-                      <SelectValue placeholder="Select sorting" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="name">By Name</SelectItem>
-                      <SelectItem value="operations">By Number of Operations</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-              </Setting>
-            )}
-          />
+        
           <FormField
             control={form.control}
             name="mode"
