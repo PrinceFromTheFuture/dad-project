@@ -1,9 +1,10 @@
 import { Agent, Operation } from "@/types";
 import fs from "fs";
 
-function decodeRawReport(data: string) {
+function decodeRawReport(data: string, branchNameInHebrew: string) {
   // Constants
-  const TABLE_START_BOUNDARY = "---------  --------------- ------------ -------------------- --------   -------------------------";
+  const TABLE_START_BOUNDARY =
+    "---------  --------------- ------------ -------------------- --------   -------------------------";
   const TABLE_END_BOUNDARY = "=========";
   const ROW_SEPARATOR_SIMPLE = "---------";
   const AGENT_BLOCK_SPLITTER = '(סה"כ לפקיד)ה';
@@ -11,7 +12,6 @@ function decodeRawReport(data: string) {
   const TOTAL_FOR_SITE_LABEL = 'סה"כ לאתר';
   const SECOND_LOCATION_SPLIT_PREFIX = '-סה"כ ל';
   const VIRTUAL_LABEL = "וירטואלי";
-  const BRANCH_NAME = "משרד ראשי";
 
   const nationalIdDecoder = [
     { key: "Z", value: "0" },
@@ -25,10 +25,12 @@ function decodeRawReport(data: string) {
     rawReport = rawReport.replaceAll(decoder.key, decoder.value);
   });
 
-
   var allAgents: Agent[] = [];
   const knownIssues = [TABLE_START_BOUNDARY, TABLE_END_BOUNDARY];
-  const dataSliced = rawReport.slice(rawReport.indexOf(knownIssues[0]) + knownIssues[0].length, rawReport.indexOf(knownIssues[1]));
+  const dataSliced = rawReport.slice(
+    rawReport.indexOf(knownIssues[0]) + knownIssues[0].length,
+    rawReport.indexOf(knownIssues[1])
+  );
 
   let agentBlockSplitter = AGENT_BLOCK_SPLITTER;
   let agentCount = 0;
@@ -51,7 +53,7 @@ function decodeRawReport(data: string) {
     let formattedAgentHeader = formattedAgent.slice(0, formattedAgent.indexOf(ROW_SEPARATOR_SIMPLE));
 
     //meaning the agent has two locations
-    if (agent.includes(VIRTUAL_LABEL) && agent.includes(BRANCH_NAME)) {
+    if (agent.includes(VIRTUAL_LABEL) && agent.includes(branchNameInHebrew)) {
       let secondPart = formattedAgent.slice(
         formattedAgent.indexOf(SECOND_LOCATION_SPLIT_PREFIX) + SECOND_LOCATION_SPLIT_PREFIX.length,
         formattedAgent.length
@@ -71,7 +73,9 @@ function decodeRawReport(data: string) {
 
     const headerRow = agentRows[0];
 
-    const headerParts = filterNonEmpty(headerRow.replaceAll(VIRTUAL_LABEL, "     ").replaceAll(BRANCH_NAME, "     ").split("  "));
+    const headerParts = filterNonEmpty(
+      headerRow.replaceAll(VIRTUAL_LABEL, "     ").replaceAll(branchNameInHebrew, "     ").split("  ")
+    );
 
     let agentMainResponsibility = headerParts[3];
 
@@ -118,7 +122,7 @@ function decodeRawReport(data: string) {
     const parsed = rows
       .slice(1)
       .map((operationStr) => {
-        const formated = operationStr.replaceAll(BRANCH_NAME, "");
+        const formated = operationStr.replaceAll(branchNameInHebrew, "");
         const operation = formated.split("  ").filter((str) => str.trim().length > 0);
 
         if (operation.length < 3) return undefined;

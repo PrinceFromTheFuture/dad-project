@@ -1,11 +1,11 @@
 /**
  * Report File Generation Module
- * 
+ *
  * This module handles the generation of PDF and ZIP files for session reports.
  * It supports two modes:
  * - Unified: Single PDF per branch
  * - Splited: Multiple PDFs grouped by role categories, packaged in a ZIP
- * 
+ *
  * It can generate reports for:
  * - A single branch (PDF or ZIP)
  * - All branches merged into a single ZIP file
@@ -165,6 +165,7 @@ const getAgentsFromUrl = async (url: string) => {
  * @returns PDF file as a buffer
  */
 const getPDFFromReport = async (report: Report, documentTitle: string) => {
+
   const agents = await getAgentsFromUrl(report.agents.url!);
   const sortedAgents = agents;
   return (await generatePDFreport(sortedAgents, documentTitle)) as BodyInit;
@@ -173,13 +174,13 @@ const getPDFFromReport = async (report: Report, documentTitle: string) => {
 /**
  * Generates multiple PDF reports, one for each role category group
  * Used when branch settings mode is "splited"
- * 
+ *
  * Process:
  * 1. Fetches all agents for the report
  * 2. Groups agents by their role categories based on branch settings
  * 3. Generates a separate PDF for each category group
  * 4. Returns array of PDF buffers with filenames
- * 
+ *
  * @param report - The report object containing agent data and branch settings
  * @returns Array of objects containing PDF bytes and filenames
  */
@@ -196,7 +197,9 @@ const getPDFFromReportSplited = async (report: Report) => {
   // Group agents by their role category
   agents.forEach((agent) => {
     // Find which category group this agent belongs to based on their responsibility
-    const agentGroup = branchCategoriesGroupsSettings.find((group) => group.data.map((role) => role.name).includes(agent.responsibility));
+    const agentGroup = branchCategoriesGroupsSettings.find((group) =>
+      group.data.map((role) => role.name).includes(agent.responsibility)
+    );
 
     if (!agentGroup) return;
     if (typeof agentsGroupedByRole[agentGroup.groupName] === "undefined") {
@@ -235,18 +238,21 @@ const getPDFFromReportSplited = async (report: Report) => {
 
 /**
  * Main function to generate report files based on provided options
- * 
+ *
  * Supports three scenarios:
  * 1. Single branch, unified mode: Returns a single PDF
  * 2. Single branch, splited mode: Returns a ZIP with multiple PDFs
  * 3. All branches merged: Returns a ZIP with all branch reports
- * 
+ *
  * @param sessionId - The ID of the session to generate reports for
  * @param options - Configuration options for report generation
  * @returns Generated file with buffer, filename, and content type
  * @throws Error if session not found, branch not found, or invalid options
  */
-export async function generateReportFile(sessionId: string, options: GenerateReportOptions): Promise<GeneratedFile> {
+export async function generateReportFile(
+  sessionId: string,
+  options: GenerateReportOptions
+): Promise<GeneratedFile> {
   // Fetch session and all associated reports
   const { session, sessionReports } = await getSessionData(sessionId);
 
@@ -264,7 +270,7 @@ export async function generateReportFile(sessionId: string, options: GenerateRep
 
     // Find the specific report for the requested branch
     const report = sessionReports.find((report) => (report.branch as Branch).id === options.branch)!;
-    
+
     if (!report) {
       throw new Error("Report not found for the specified branch");
     }
@@ -280,7 +286,7 @@ export async function generateReportFile(sessionId: string, options: GenerateRep
         filename: `${report.branch.name} - ${formatSessionDate(session.year!, session.month!)}.pdf`,
         contentType: "application/pdf",
       };
-    } 
+    }
     // Branch uses splited mode: Generate multiple PDFs grouped by category, packaged in ZIP
     else if (report.branch.settings.mode === "splited") {
       const zippedReports = new zip();
@@ -290,7 +296,7 @@ export async function generateReportFile(sessionId: string, options: GenerateRep
       reportsBytes.forEach((report) => {
         zippedReports.file(report.fileName, report.bytes as Buffer);
       });
-      
+
       // Generate the final ZIP file
       const zipFile = await zippedReports.generateAsync({ type: "arraybuffer" });
 
@@ -300,7 +306,7 @@ export async function generateReportFile(sessionId: string, options: GenerateRep
         contentType: "application/zip",
       };
     }
-  } 
+  }
   // ========================================
   // Scenario 2: Generate reports for all branches, merged into one ZIP
   // ========================================
@@ -310,13 +316,17 @@ export async function generateReportFile(sessionId: string, options: GenerateRep
     // Iterate through all reports and add them to the ZIP
     for (const report of sessionReports) {
       // For unified branches: Add single PDF directly to ZIP root
+
       if (report.branch.settings.mode === "unified") {
         const reportBytes = await getPDFFromReport(
           report,
           `${report.branch.nameInHebrew} - ${hebrewMonths[0]} ${session.year!.toString().split("").reverse().join("")}`
         );
-        zippedReports.file(`${report.branch.name} - ${formatSessionDate(session.year!, session.month!)}.pdf`, reportBytes as Buffer);
-      } 
+        zippedReports.file(
+          `${report.branch.name} - ${formatSessionDate(session.year!, session.month!)}.pdf`,
+          reportBytes as Buffer
+        );
+      }
       // For splited branches: Create a folder and add multiple PDFs inside
       else if (report.branch.settings.mode === "splited") {
         // Create a subfolder for this branch
@@ -329,7 +339,7 @@ export async function generateReportFile(sessionId: string, options: GenerateRep
         });
       }
     }
-    
+
     // Generate the final ZIP file containing all branches
     const zipFile = await zippedReports.generateAsync({ type: "arraybuffer" });
 

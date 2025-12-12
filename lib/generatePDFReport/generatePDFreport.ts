@@ -9,11 +9,13 @@ import { drawAgent } from "./drawAgent";
 const getPage = (doc: PDFDocument) => doc.getPage(doc.getPageCount() - 1);
 
 async function generatePDFreport(agents: Agent[], documentTitle: string): Promise<Uint8Array> {
-  console.log(documentTitle);
   const document = await PDFDocument.create();
   const cursor = {
     x: CONFIG.dimensions.page.width - CONFIG.dimensions.mainContentSideMargin,
-    y: CONFIG.dimensions.page.height - CONFIG.dimensions.mainContentTopMargin - CONFIG.dimensions.agentBoxMargin,
+    y:
+      CONFIG.dimensions.page.height -
+      CONFIG.dimensions.mainContentTopMargin -
+      CONFIG.dimensions.agentBoxMargin,
   };
   const { medium, semiBold } = await registerFonts(document);
 
@@ -31,7 +33,10 @@ async function generatePDFreport(agents: Agent[], documentTitle: string): Promis
         font: semiBold,
         document,
       });
-      cursor.y = CONFIG.dimensions.page.height - CONFIG.dimensions.mainContentTopMargin - CONFIG.dimensions.agentBoxMargin;
+      cursor.y =
+        CONFIG.dimensions.page.height -
+        CONFIG.dimensions.mainContentTopMargin -
+        CONFIG.dimensions.agentBoxMargin;
     }
     await drawAgent({ page, font: { medium, semiBold }, document, cursor, agent, pageTitle: documentTitle });
     lastUsedAgentResponsibility = agent.responsibility;

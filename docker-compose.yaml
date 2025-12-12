@@ -12,22 +12,20 @@ services:
       - PAYLOAD_SECRET="fjkdshi7h3iu"
       - NEXT_PUBLIC_REMOTES_SERVER_URL=http://host.docker.internal:3001
     volumes:
-      - app-data:/app/db/media 
-    post_start:
-      - command: bun run load
+      - app-data:/app/db/media
     depends_on:
       - mongo
-  
+
   mongo:
     image: mongo
     container_name: mongo_db_main
     ports:
-      - "27017:27017"
+      - "27016:27017"
     volumes:
-      - mongo-data:/data/db
+      - ./mongo-data:/data/db
 
 volumes:
   mongo-data:
     name: app_db_test
-  app-data: 
+  app-data:
     name: app_reports

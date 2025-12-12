@@ -18,11 +18,10 @@ import GenerateReports from "./_components/GenerateReports";
 
 export const dynamic = "force-dynamic";
 
-
 async function page({ params }: { params: Promise<{ sessionId: string }> }) {
   const { sessionId } = await params;
   const payload = await getPayload();
-  const { docs: allSessions } = await payload.find({ collection: "sessions", depth: 0 });
+  const { docs: allSessions } = await payload.find({ collection: "sessions", depth: 0, pagination: false });
   const reports = await payload.find({
     collection: "reports",
     where: {
@@ -30,16 +29,16 @@ async function page({ params }: { params: Promise<{ sessionId: string }> }) {
         equals: sessionId,
       },
     },
+    pagination: false,
   });
 
   const branchesReport: BranchReport[] = [];
   const allAgents: AgentView[] = [];
   const allOperations: OperationView[] = [];
 
-
   for (const report of reports.docs) {
     const reportAgentsMedia = report.agents as unknown as Media;
-    const response = await fetch(`http://localhost:3000${reportAgentsMedia.url!}`, { method: "GET" });
+    const response = await fetch(`http://localhost:3002${reportAgentsMedia.url!}`, { method: "GET" });
 
     if (!response.ok) {
       console.error("HTTP error", response.status, response.statusText);
@@ -92,8 +91,8 @@ async function page({ params }: { params: Promise<{ sessionId: string }> }) {
         <div className=" flex gap-4">
           <SelectSession defaultSessionId={sessionId} sessions={allSessions} />
           <GenerateReports
-          branches={reports.docs.map((report)=>report.branch as Branch)}
-          sessionId={sessionId}
+            branches={reports.docs.map((report) => report.branch as Branch)}
+            sessionId={sessionId}
             trigger={
               <Button size={"lg"} className=" flex gap-2 cursor-pointer items-center ">
                 Export PDF
@@ -111,7 +110,9 @@ async function page({ params }: { params: Promise<{ sessionId: string }> }) {
             Total Branches in Session
           </CardHeader>
           <CardContent className="">{reports.docs.length}</CardContent>
-          <CardFooter>{reports.docs.length > 0 ? `${reports.docs.length - 1} last session` : "No previous session data"}</CardFooter>
+          <CardFooter>
+            {reports.docs.length > 0 ? `${reports.docs.length - 1} last session` : "No previous session data"}
+          </CardFooter>
         </Card>
 
         {/* Card 2: Total Agents Across All Branches */}
@@ -121,7 +122,11 @@ async function page({ params }: { params: Promise<{ sessionId: string }> }) {
             Total Agents
           </CardHeader>
           <CardContent className="">{allAgents.length}</CardContent>
-          <CardFooter>{allAgents.length > 0 ? `${Math.round(allAgents.length * 0.95)} last session` : "No previous session data"}</CardFooter>
+          <CardFooter>
+            {allAgents.length > 0
+              ? `${Math.round(allAgents.length * 0.95)} last session`
+              : "No previous session data"}
+          </CardFooter>
         </Card>
 
         {/* Card 3: Total Operations Across All Branches */}
@@ -131,7 +136,11 @@ async function page({ params }: { params: Promise<{ sessionId: string }> }) {
             Total Operations
           </CardHeader>
           <CardContent className="">{allOperations.length}</CardContent>
-          <CardFooter>{allOperations.length > 0 ? `${Math.round(allOperations.length * 0.9)} last session` : "No previous session data"}</CardFooter>
+          <CardFooter>
+            {allOperations.length > 0
+              ? `${Math.round(allOperations.length * 0.9)} last session`
+              : "No previous session data"}
+          </CardFooter>
         </Card>
 
         {/* Card 4: Largest Branch by Operation Count */}
@@ -142,7 +151,9 @@ async function page({ params }: { params: Promise<{ sessionId: string }> }) {
           </CardHeader>
           <CardContent className="">
             {branchesReport.length > 0
-              ? branchesReport.reduce((prev, curr) => (curr.totalOperations > prev.totalOperations ? curr : prev)).name
+              ? branchesReport.reduce((prev, curr) =>
+                  curr.totalOperations > prev.totalOperations ? curr : prev
+                ).name
               : "N/A"}
           </CardContent>
           <CardFooter>

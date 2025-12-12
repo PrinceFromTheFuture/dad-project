@@ -10,8 +10,8 @@ export const revalidate = 0;
 
 async function LastSessions() {
   const payload = await getPayload();
-  const { docs: sessions } = await payload.find({ collection: "sessions" });
-  const { docs: reports } = await payload.find({ collection: "reports", depth: 0 });
+  const { docs: sessions } = await payload.find({ collection: "sessions", pagination: false });
+  const { docs: reports } = await payload.find({ collection: "reports", depth: 0, pagination: false });
   if (sessions.length === 0) {
     return;
   }

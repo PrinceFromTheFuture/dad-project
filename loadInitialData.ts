@@ -1,7 +1,7 @@
 import getPayload from "@/lib/getPayload";
 import axios from "axios";
 
-const REMOTE_SERVER_URL = process.env.NEXT_PUBLIC_REMOTES_SERVER_URL || "http://localhost:3001";
+const REMOTE_SERVER_URL = "http://localhost:3001";
 
 console.log(REMOTE_SERVER_URL)
 /**

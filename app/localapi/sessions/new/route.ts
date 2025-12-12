@@ -1,4 +1,4 @@
-// app/api/create-session/route.ts
+import fs from "fs"; // app/api/create-session/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import dayjs from "dayjs";
 import { z } from "zod";
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
 
     const { month, nickname, year } = parsedBody.data;
     const payload = await getPayload();
-    const { docs: branches } = await payload.find({ collection: "branches" });
+    const { docs: branches } = await payload.find({ collection: "branches", pagination: false });
     // Convert files to Buffers and pair with branchNames
     const rawReports = await Promise.all(
       files.map(async (file, index) => {
@@ -51,8 +51,11 @@ export async function POST(req: NextRequest) {
           throw new Error(`Invalid file at index ${index}`);
         }
         const buffer = Buffer.from(await file.arrayBuffer());
+        const branch = branches.find((branch) => file.name.includes(branch.searchKey))!;
+
         return {
-          branchId: branches.find((branch) => file.name.includes(branch.searchKey!))!,
+          branchId: branch.id,
+          branchName: branch.nameInHebrew,
           data: buffer,
         };
       })
@@ -63,7 +66,7 @@ export async function POST(req: NextRequest) {
       collection: "sessions",
       data: {
         nickname,
-        month: month - 1 ,// Adjust month to be zero-based,
+        month: month - 1, // Adjust month to be zero-based,
         year,
       },
     });
@@ -74,11 +77,21 @@ export async function POST(req: NextRequest) {
       const agentsUploadName = uuidv4();
 
       // Decode the raw report
-      const decoded = decodeRawRepoert(rawReport.data.toString()); // Assumes decodeRawRepoert accepts a Buffer
+      const decoded = decodeRawRepoert(rawReport.data.toString(), rawReport.branchName); // Assumes decodeRawRepoert accepts a Buffer
       const decodedJson = {
         agents: JSON.stringify(decoded.allAgents),
       };
 
+      console.log("writing");
+      fs.writeFileSync(
+        `C:\\Users\\Amirw\\OneDrive\\Desktop\\projects\\dad-project\\test\\${rawReport.branchName}.json`,
+        JSON.stringify(decoded.allAgents)
+      );
+
+      if (rawReport.data.buffer.byteLength < 20) {
+        console.log(typeof rawReport.data.buffer.byteLength);
+        throw new Error("LOLLL");
+      }
       // Upload raw report to media collection
       const rawReportUpload = await payload.create({
         collection: "media",
@@ -90,7 +103,9 @@ export async function POST(req: NextRequest) {
           size: rawReport.data.byteLength,
         },
       });
+
       // Upload agents JSON to media collection
+
       const agentsUpload = await payload.create({
         collection: "media",
         data: { name: agentsUploadName },

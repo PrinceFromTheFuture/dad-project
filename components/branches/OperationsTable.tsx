@@ -17,7 +17,6 @@ import {
 } from "@tanstack/react-table";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { operations } from "../../../operations"; // Assuming operations data is imported
 import { OperationView } from "@/types";
 
 // Define column structure for the table
